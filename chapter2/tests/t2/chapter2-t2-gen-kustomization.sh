@@ -15,10 +15,14 @@ fi
 if [[ ! -d "repos" ]]; then
   mkdir repos
 fi
+
+
 # ssh-keys generation
 for arg in $@; do
   ssh-keygen -t ed25519 -N "" -C "$arg" -f ./repos/$arg-deploy-key.pem;
 done
+
+
 # Head generation
 echo "
 apiVersion: kustomize.config.k8s.io/v1beta1
@@ -28,6 +32,8 @@ generatorOptions:
   disableNameSuffixHash: true
 
 secretGenerator:" > ./repos/kustomization.yaml
+
+
 # Each rep generation
 for arg in $@; do
     echo "
@@ -44,5 +50,7 @@ for arg in $@; do
     files:
       - sshPrivateKey=$arg-deploy-key.pem" >> ./repos/kustomization.yaml
 done
+
+
 # kustomize run
 exec kustomize build repos
