@@ -4,6 +4,12 @@
 set -eo pipefail
 
 
+# Error handling function.
+err() {
+  echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $*" >&2
+}
+
+
 # Function for delimiter
 print_separator() {
   printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' -
@@ -19,14 +25,14 @@ create_file() {
 
 # checking permissions
 if [[ ! -r $(pwd) ]]; then
-  echo 'Directory is not readable.'
+  err "Directory is not readable."
   exit 255
 fi
 
 
 # Args check
 if [[ "$#" -ne 2 ]]; then
-  echo 'Error: Two arguments are required'
+  err "Error: Two arguments are required"
   exit 1
 fi
 
