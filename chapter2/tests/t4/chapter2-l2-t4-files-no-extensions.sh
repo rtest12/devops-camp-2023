@@ -4,6 +4,7 @@
 set -eo pipefail
 
 
+# Error handling function.
 err() {
   echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $*" >&2
 }
