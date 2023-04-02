@@ -10,6 +10,7 @@ if [ "$#" -ne 1 ]; then
   exit 1
 fi
 
+
 # Find only regular files and put in array.
 files=$(find $1 -type f)
 
@@ -18,5 +19,3 @@ files=$(find $1 -type f)
 for file in $files; do
   echo ${file%.*}
 done
-
-
