@@ -1,10 +1,10 @@
 #!/bin/bash
 #
-# Task 4 - get filename without the extension
+# Task 4 - get filename without the extension.
 set -eo pipefail
 
 
-# Find only regular files and put in var
+# Find only regular files and put in array.
 files=$(find $1 -type f)
 
 
