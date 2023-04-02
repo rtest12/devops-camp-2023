@@ -1,17 +1,25 @@
 #!/bin/bash
 #
 # Task 2 - Generate kustomization.yaml
-
 set -eo pipefail
+
+
+err() {
+  echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $*" >&2
+}
+
+
 # Checks (perms, args, dir-exist)
 if ! [[ -r $(pwd) ]]; then
-  echo 'Directory is not readable.'
+  err "Directory is not readable."
   exit 255
 fi
+
 if [[ "$#" -lt 1 ]]; then
-  echo 'At least 1 or more args are expected'
+  err "At least 1 or more args are expected"
   exit 1
 fi
+
 if [[ ! -d "repos" ]]; then
   mkdir repos
 fi
