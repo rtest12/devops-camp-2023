@@ -4,9 +4,15 @@
 set -eo pipefail
 
 
+# Error handling function.
+err() {
+  echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $*" >&2
+}
+
+
 # args check
 if [ "$#" -ne 1 ]; then
-  echo "Specify a single directory."
+  err "Specify a single directory."
   exit 1
 fi
 
