@@ -17,11 +17,17 @@ print_separator() {
 }
 
 
-# Function to generate a random string and write to a file with permissions
+# Function to generate a random string and write to a file in local folder with permissions
 create_file() {
-  local filecr="$1"
-  openssl rand -base64 20 > "$filecr" && chmod 700 "$filecr"
+  local file="$1"
+  if [[ "$file" == /* ]]; then
+    file="${file##*/}"
+  fi
+  local script_dir=$(dirname "$(realpath "$0")")
+  local file_path="$script_dir/$file"
+  openssl rand -base64 20 > "$file_path" && chmod 700 "$file_path"
 }
+
 
 
 # checking permissions
