@@ -5,8 +5,9 @@ set -eo pipefail
 
 
 # Error handling function.
+# TODO: add extra argument error_code
 err() {
-  echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $*" >&2
+  echo "[[ERROR]: $(date +'%Y-%m-%dT%H:%M:%S%z')]: $*" >&2
 }
 
 
@@ -24,7 +25,7 @@ create_file() {
 
 
 # checking permissions
-if [[ ! -r $(pwd) ]]; then
+if [[ ! -r "$(pwd)" ]]; then
   err "Directory is not readable."
   exit 255
 fi
@@ -38,11 +39,10 @@ fi
 
 
 # If the file exists and is a regular file - show, if not - create and fill.
-files=("$@")
-for file in "${files[@]}"; do
+for file in "$@"; do
   if [ -e "$file" ]; then
     print_separator
-    echo "$file is here": && cat "$file"
+    echo "$file is here:" && cat "$file"
     print_separator
   else
     echo "$file not exist, it will be created."
