@@ -12,7 +12,7 @@ readonly ALL_NS_URL='https://gist.githubusercontent.com/dmitry-mightydevops/297c
 # $1 - The exit code to use when exiting the script
 # $2 - The error message to print
 err() {
-  local code=$1
+  local code="$1"
   shift
   echo "[[ERROR]: $(date +'%Y-%m-%dT%H:%M:%S%z')]: $*" >&2
   exit "$code"
@@ -20,11 +20,11 @@ err() {
 
 # File exist check
 if curl -s --head  --request GET "$ALL_NS_URL" | grep "404" > /dev/null; then
-  err 255 "File with saved namespaces list not found"
+  err 255 'File with saved namespaces list not found'
 fi
 
 if curl -s --head  --request GET "$ALL_NS_URL" | grep "404" > /dev/null; then
-  err 255 "File with all namespases list not found"
+  err 255 'File with all namespases list not found'
 fi
 
 
@@ -33,12 +33,12 @@ saved_namespaces=$(curl -sSL $SAVED_NS_URL | yq '.spec.source.helm.values | from
 
 
 # Downloading YAML with all namespaces and saving into array.
-all_namespaces=$(curl -sSL $ALL_NS_URL)
+all_namespaces=$(curl -sSL "$ALL_NS_URL")
 
 
 # We output only those namespaces that are not present in the array of saved namespaces.
 for val in ${all_namespaces[@]}; do
   if [[ ! ${saved_namespaces[@]} =~ ${val} ]]; then
-    echo $val
+    echo "$val"
   fi
 done
