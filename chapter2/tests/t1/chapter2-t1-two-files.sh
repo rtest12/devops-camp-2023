@@ -8,7 +8,7 @@ set -eo pipefail
 # $1 - The exit code to use when exiting the script
 # $2 - The error message to print
 err() {
-  local code=$1
+  local code="$1"
   shift
   echo "[[ERROR]: $(date +'%Y-%m-%dT%H:%M:%S%z')]: $*" >&2
   exit "$code"
