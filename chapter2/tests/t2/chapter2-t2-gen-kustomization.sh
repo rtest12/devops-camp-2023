@@ -11,7 +11,7 @@ repo_dir=repos
 # $1 - The exit code to use when exiting the script
 # $2 - The error message to print
 err() {
-  local code=$1
+  local code="$1"
   shift
   echo "[[ERROR]: $(date +'%Y-%m-%dT%H:%M:%S%z')]: $*" >&2
   exit "$code"
@@ -34,7 +34,7 @@ fi
 
 # ssh-keys generation
 for repo_name in "$@"; do
-  rm -f ./$repo_dir/$repo_name-deploy-key.pem* && ssh-keygen -q -t ed25519 -N "" -C "$repo_name" -f ./$repo_dir/$repo_name-deploy-key.pem;
+  rm -f ./$repo_dir/$repo_name-deploy-key.pem* && ssh-keygen -q -t ed25519 -N "" -C "$repo_name" -f "./$repo_dir/$repo_name-deploy-key.pem";
 done
 
 
@@ -50,20 +50,20 @@ secretGenerator:" > ./$repo_dir/kustomization.yaml
 
 
 # Generate each repo content
-for arg in "$@"; do
+for repo_name in "$@"; do
     echo "
-  - name: $arg
+  - name: $repo_name
     namespace: argo-cd
     options:
       labels:
-        argocd.argoproj.io/secret-type: $arg
+        argocd.argoproj.io/secret-type: $repo_name
     literals:
-      - name=$arg
-      - url=git@github.com:saritasa-nest/$arg.git
+      - name=$repo_name
+      - url=git@github.com:saritasa-nest/$repo_name.git
       - type=git
       - project=default
     files:
-      - sshPrivateKey=$arg-deploy-key.pem" >> ./$repo_dir/kustomization.yaml
+      - sshPrivateKey=$repo_name-deploy-key.pem" >> ./$repo_dir/kustomization.yaml
 done
 
 
