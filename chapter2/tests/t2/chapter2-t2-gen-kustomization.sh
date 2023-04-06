@@ -4,7 +4,7 @@
 set -eo pipefail
 
 
-repo_dir=repos
+readonly REPO_DIR='repos'
 
 
 # Function for printing error messages and exiting with a specific exit code
@@ -27,31 +27,31 @@ if [[ "$#" -lt 1 ]]; then
   err 255 'At least 1 or more args are expected'
 fi
 
-if [[ ! -d "$repo_dir" ]]; then
-  mkdir $repo_dir
+if [[ ! -d "$REPO_DIR" ]]; then
+  mkdir "$REPO_DIR"
 fi
 
 
 # ssh-keys generation
 for repo_name in "$@"; do
-  rm -f ./$repo_dir/$repo_name-deploy-key.pem* && ssh-keygen -q -t ed25519 -N "" -C "$repo_name" -f "./$repo_dir/$repo_name-deploy-key.pem";
+  rm -f "./$REPO_DIR/$repo_name-deploy-key.pem" && ssh-keygen -q -t ed25519 -N "" -C "$repo_name" -f "./$REPO_DIR/$repo_name-deploy-key.pem";
 done
 
 
 # Generate file beginning
-echo "
+cat << EOF > ./$REPO_DIR/kustomization.yaml
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 generatorOptions:
   disableNameSuffixHash: true
 
-secretGenerator:" > ./$repo_dir/kustomization.yaml
-
+secretGenerator:
+EOF
 
 # Generate each repo content
 for repo_name in "$@"; do
-    echo "
+    cat << EOF >> ./$REPO_DIR/kustomization.yaml
   - name: $repo_name
     namespace: argo-cd
     options:
@@ -63,9 +63,10 @@ for repo_name in "$@"; do
       - type=git
       - project=default
     files:
-      - sshPrivateKey=$repo_name-deploy-key.pem" >> ./$repo_dir/kustomization.yaml
+      - sshPrivateKey=$repo_name-deploy-key.pem
+EOF
 done
 
 
 # kustomize run
-exec kustomize build $repo_dir
+exec kustomize build "$REPO_DIR"
