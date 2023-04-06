@@ -4,10 +4,14 @@
 set -eo pipefail
 
 
-# Error handling function.
-# TODO: add extra argument error_code
+# Function for printing error messages and exiting with a specific exit code
+# $1 - The exit code to use when exiting the script
+# $2 - The error message to print
 err() {
+  local code=$1
+  shift
   echo "[[ERROR]: $(date +'%Y-%m-%dT%H:%M:%S%z')]: $*" >&2
+  exit "$code"
 }
 
 
@@ -20,27 +24,28 @@ print_separator() {
 # Function to generate a random string and write to a file in local folder with permissions
 create_file() {
   local file="$1"
+  # If the file name starts with a forward slash, extract only the file name portion
   if [[ "$file" == /* ]]; then
     file="${file##*/}"
   fi
+  # Get the directory of the script calling this function
   local script_dir=$(dirname "$(realpath "$0")")
+  # Construct the full path of the file to create
   local file_path="$script_dir/$file"
+  # Generate random data, write it to the file and set the file permissions
   openssl rand -base64 20 > "$file_path" && chmod 700 "$file_path"
 }
 
 
-
-# checking permissions
+# Checking permissions
 if [[ ! -r "$(pwd)" ]]; then
-  err "Directory is not readable."
-  exit 255
+  err 255 'Directory is not readable.'
 fi
 
 
 # Args check
 if [[ "$#" -ne 2 ]]; then
-  err "Error: Two arguments are required"
-  exit 1
+  err 1 'Two arguments are required.'
 fi
 
 
