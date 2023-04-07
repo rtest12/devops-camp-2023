@@ -15,7 +15,7 @@ err() {
 }
 
 
-# args check
+# Args check
 if [ "$#" -ne 1 ]; then
   err  255 'Specify a single directory.'
 fi
