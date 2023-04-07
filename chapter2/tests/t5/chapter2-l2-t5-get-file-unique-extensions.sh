@@ -26,6 +26,7 @@ files=$(find "$1" -type f)
 
 # Then we cut out the paths and file names, leaving only unique extensions.
 for file in ${files}; do
+# local var list
   list=${file##*/}
   if echo "${list}" | grep -q "\."; then
     echo "${list##*.}"
