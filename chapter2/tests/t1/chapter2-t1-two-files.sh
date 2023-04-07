@@ -21,19 +21,12 @@ print_separator() {
 }
 
 
-# Function to generate a random string and write to a file in local folder with permissions
+# Function to generate a random string and write to a file in a local directory with permissions
 create_file() {
   local file="$1"
-  # If the file name starts with a forward slash, extract only the file name portion
-  if [[ "$file" == /* ]]; then
-    file="${file##*/}"
-  fi
-  # Get the directory of the script calling this function
-  local script_dir=$(dirname "$(realpath "$0")")
-  # Construct the full path of the file to create
-  local file_path="$script_dir/$file"
+  file="${file##*/}"
   # Generate random data, write it to the file and set the file permissions
-  openssl rand -base64 20 > "$file_path" && chmod 700 "$file_path"
+  openssl rand -base64 20 > "$file" && chmod 700 "$file"
 }
 
 
@@ -41,7 +34,6 @@ create_file() {
 if [[ ! -r "$(pwd)" ]]; then
   err 255 'Directory is not readable.'
 fi
-
 
 # Args check
 if [[ "$#" -ne 2 ]]; then
@@ -56,7 +48,7 @@ for file in "$@"; do
     echo "$file is here:" && cat "$file"
     print_separator
   else
-    echo "$file not exist, it will be created."
+    echo "$file not exist, it will be created in a local directory."
     create_file "$file"
   fi
 done
