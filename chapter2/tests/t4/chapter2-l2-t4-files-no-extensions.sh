@@ -28,7 +28,10 @@ fi
 
 
 # Find only regular files and put in array.
-files=( $(find "$1" -type f) )
+files=()
+while IFS= read -r -d '' file; do
+  files+=("$file")
+done < <(find "$1" -type f -print0)
 
 
 # Then we cut off the paths and extensions.
