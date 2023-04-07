@@ -21,20 +21,9 @@ if [ "$#" -ne 1 ]; then
 fi
 
 
-# Directory exist check
-if [ ! -d "$1" ]; then
-  err  255 'Directory does not exist.'
-fi
-
-
-# Find only regular files and put in array.
-files=()
-while IFS= read -r -d '' file; do
-  files+=("$file")
-done < <(find "$1" -type f -print0)
-
-
-# Then we cut off the paths and extensions.
-for file in "${files[@]}"; do
-  echo "${file%%.*}"
+# Find all regular files in the directory and its subdirectories
+find "$1" -type f | while read file; do
+# Get the filename without the extension and keep the path
+  filename="${file##*/}"
+  echo "${file%/*}/${filename%%.*}"
 done
