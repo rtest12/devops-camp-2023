@@ -4,24 +4,28 @@
 set -eo pipefail
 
 
-# Error handling function.
+# Function for printing error messages and exiting with a specific exit code
+# $1 - The exit code to use when exiting the script
+# $2 - The error message to print
 err() {
-  echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $*" >&2
+  local code="$1"
+  shift
+  echo "[[ERROR]: $(date +'%Y-%m-%dT%H:%M:%S%z')]: $*" >&2
+  exit "$code"
 }
 
 
-# args check
+# Args check
 if [ "$#" -ne 1 ]; then
-  err "Specify a single directory."
-  exit 1
+  err 255 'Two arguments are required.'
 fi
 
 
 # Find only regular files and put in array
-files=$(find $1 -type f)
+files=$(find "$1" -type f)
 
 
-# Extract file names and keep only unique directories.
-for file in $files; do
-  echo ${file%/*}
-done | sort | uniq
+
+find "$1" -type f | while read file; do
+  echo "${file%/*}"
+done
