@@ -25,7 +25,7 @@ fi
 files=$(find "$1" -type f)
 
 
-
+# Leave only a list of all unique directories, without files
 find "$1" -type f | while read file; do
   echo "${file%/*}"
 done
