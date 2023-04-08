@@ -19,8 +19,8 @@ err() {
 
 
 # Checking arguments for compliance with repository syntax.
-for i in "$@"; do
-  if [[ ! "${i}" =~ ^[A-Za-z0-9_.-]+$ ]]; then
+for arg in "$@"; do
+  if [[ ! "${arg}" =~ ^[A-Za-z0-9_.-]+$ ]]; then
     err 255 'Invalid repository name.'
   fi
 done
