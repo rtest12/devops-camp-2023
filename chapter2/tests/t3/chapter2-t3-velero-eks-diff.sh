@@ -15,7 +15,7 @@ err() {
   local code="$1"
   shift
   echo "[[ERROR]: $(date +'%Y-%m-%dT%H:%M:%S%z')]: $@" >&2
-  exit "$code"
+exit "${code}"
 }
 
 
@@ -25,10 +25,10 @@ err() {
 get_file() {
   local url="$1"
   local save_to_var="$2"
-  if ! curl -sSL --head --request GET "$url" | grep "200" > /dev/null; then
-    err 255 "Error getting $url"
+  if ! curl -sSL --head --request GET "${url}" | grep "200" > /dev/null; then
+    err 255 "Error getting ${url}"
   else
-    declare -g "$save_to_var=$(curl -sSL "$url")"
+    declare -g "$save_to_var=$(curl -sSL "${url}")"
   fi
 }
 
@@ -39,17 +39,17 @@ if ! command -v yq > /dev/null; then
 fi
 
 
-get_file "$VALERO_URL" "valero"
-get_file "$ALL_NAMESPACES_URL" "all_namespaces"
+get_file "${VALERO_URL}" "valero"
+get_file "${ALL_NAMESPACES_URL}" "all_namespaces"
 
 
 # Processing YAML, extracting namespaces being preserved into an array.
-saved_namespaces=$(yq '.spec.source.helm.values | from_yaml | .schedules.[].template.includedNamespaces[]' <<< "$valero")
+saved_namespaces=$(yq '.spec.source.helm.values | from_yaml | .schedules.[].template.includedNamespaces[]' <<< "${valero}")
 
 
 # We output only those namespaces that are not present in the array of saved namespaces.
 for namespace in ${all_namespaces[@]}; do
   if [[ ! "${saved_namespaces[@]}" =~ "${namespace}" ]]; then
-    echo "$namespace"
+    echo "${namespace}"
   fi
 done
