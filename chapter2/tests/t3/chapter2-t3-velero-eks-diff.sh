@@ -14,7 +14,7 @@ readonly ALL_NAMESPACES_URL='https://gist.githubusercontent.com/dmitry-mightydev
 err() {
   local code="$1"
   shift
-  echo "[[ERROR]: $(date +'%Y-%m-%dT%H:%M:%S%z')]: $@" >&2
+  echo "[[ERROR]: $(date +'%Y-%m-%dT%H:%M:%S%z')]: ${*}" >&2
 exit "${code}"
 }
 
