@@ -10,8 +10,8 @@ set -eo pipefail
 err() {
   local code="$1"
   shift
-  echo "[[ERROR]: $(date +'%Y-%m-%dT%H:%M:%S%z')]: $*" >&2
-  exit "$code"
+  echo "[[ERROR]: $(date +'%Y-%m-%dT%H:%M:%S%z')]: ${*}" >&2
+  exit "${code}"
 }
 
 
@@ -26,7 +26,7 @@ create_file() {
   local file="$1"
   file="${file##*/}"
   # Generate random data, write it to the file and set the file permissions
-  openssl rand -base64 20 > "$file" && chmod 700 "$file"
+  openssl rand -base64 20 > "${file}" && chmod 700 "${file}"
 }
 
 
@@ -43,12 +43,12 @@ fi
 
 # If the file exists and is a regular file - show, if not - create and fill.
 for file in "$@"; do
-  if [ -e "$file" ]; then
+  if [ -e "${file}" ]; then
     print_separator
-    echo "$file is here:" && cat "$file"
+    echo "${file} is here:" && cat "${file}"
     print_separator
   else
-    echo "$file not exist, it will be created in a local directory."
-    create_file "$file"
+    echo "${file} not exist, it will be created in a local directory."
+    create_file "${file}"
   fi
 done
