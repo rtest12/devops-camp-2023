@@ -11,7 +11,7 @@ err() {
   local code="$1"
   shift
   echo "[[ERROR]: $(date +'%Y-%m-%dT%H:%M:%S%z')]: $*" >&2
-  exit "$code"
+  exit "${code}"
 }
 
 
