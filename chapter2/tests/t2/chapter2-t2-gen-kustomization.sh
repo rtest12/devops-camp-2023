@@ -14,13 +14,13 @@ err() {
   local code="$1"
   shift
   echo "[[ERROR]: $(date +'%Y-%m-%dT%H:%M:%S%z')]: $*" >&2
-  exit "$code"
+  exit "${code}"
 }
 
 
 # Checking arguments for compliance with repository syntax.
-for arg in "$@"; do
-  if [[ ! "${arg}" =~ ^[A-Za-z0-9_.-]+$ ]]; then
+for repo_name in "$@"; do
+  if [[ ! "${repo_name}" =~ ^[A-Za-z0-9_.-]+$ ]]; then
     err 255 'Invalid repository name.'
   fi
 done
@@ -35,19 +35,19 @@ if [[ "$#" -lt 1 ]]; then
   err 255 'At least 1 or more args are expected'
 fi
 
-if [[ ! -d "$REPO_DIR" ]]; then
-  mkdir "$REPO_DIR"
+if [[ ! -d "${REPO_DIR}" ]]; then
+  mkdir "${REPO_DIR}"
 fi
 
 
 # ssh-keys generation
 for repo_name in "$@"; do
-  rm -f "./$REPO_DIR/$repo_name-deploy-key.pem" && ssh-keygen -q -t ed25519 -N "" -C "$repo_name" -f "./$REPO_DIR/$repo_name-deploy-key.pem";
+  rm -f "./${REPO_DIR}/${repo_name}-deploy-key.pem" && ssh-keygen -q -t ed25519 -N "" -C "${repo_name}" -f "./${REPO_DIR}/${repo_name}-deploy-key.pem";
 done
 
 
 # Generate file beginning
-cat << EOF > ./$REPO_DIR/kustomization.yaml
+cat << EOF > ./${REPO_DIR}/kustomization.yaml
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
@@ -59,22 +59,22 @@ EOF
 
 # Generate each repo content
 for repo_name in "$@"; do
-    cat << EOF >> ./$REPO_DIR/kustomization.yaml
-  - name: $repo_name
+    cat << EOF >> ./${REPO_DIR}/kustomization.yaml
+  - name: ${repo_name}
     namespace: argo-cd
     options:
       labels:
-        argocd.argoproj.io/secret-type: $repo_name
+        argocd.argoproj.io/secret-type: ${repo_name}
     literals:
-      - name=$repo_name
-      - url=git@github.com:saritasa-nest/$repo_name.git
+      - name=${repo_name}
+      - url=git@github.com:saritasa-nest/${repo_name}.git
       - type=git
       - project=default
     files:
-      - sshPrivateKey=$repo_name-deploy-key.pem
+      - sshPrivateKey=${repo_name}-deploy-key.pem
 EOF
 done
 
 
 # kustomize run
-exec kustomize build "$REPO_DIR"
+exec kustomize build "${REPO_DIR}"
