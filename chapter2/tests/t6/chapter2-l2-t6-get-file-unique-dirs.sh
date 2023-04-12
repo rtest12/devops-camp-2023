@@ -1,5 +1,4 @@
 #!/bin/bash
-#
 # Task 6 - get only dirs of the files
 set -eo pipefail
 
@@ -17,15 +16,11 @@ err() {
 
 # Args check
 if [ "$#" -ne 1 ]; then
-  err 255 'Two arguments are required.'
+  err 255 'Specify a single directory.'
 fi
 
 
-# Find only regular files and put in array
-files=$(find "$1" -type f)
-
-
-# Leave only a list of all unique directories, without files
+# Find only regular files and leave only a unique directories, without filenames.
 find "$1" -type f | while read file; do
   echo "${file%/*}"
 done | sort -u
