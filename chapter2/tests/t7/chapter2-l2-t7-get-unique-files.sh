@@ -1,5 +1,4 @@
 #!/bin/bash
-#
 # t7 - get only the filenames
 set -eo pipefail
 
@@ -21,11 +20,7 @@ if [ "$#" -ne 1 ]; then
 fi
 
 
-# Find only regular files and put in array.
-files=$(find "$1" -type f)
-
-
-# Leave only unique files, without extensions
+# Find only regular files and leave only unique, with extensions but without the absolute path 
 find "$1" -type f | while read file; do
   echo "${file##*/}"
 done | sort -u
