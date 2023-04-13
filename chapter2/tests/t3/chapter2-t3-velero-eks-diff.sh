@@ -1,10 +1,9 @@
 #!/bin/bash
-#
 # Task 3 - find namespaces without the backup
 set -eo pipefail
 
 
-readonly VALERO_URL='https://gist.github.com/dmitry-mightydevops/016139747b6cefdc94160607f95ede74/raw/velero.yaml'
+readonly VELERO_URL='https://gist.github.com/dmitry-mightydevops/016139747b6cefdc94160607f95ede74/raw/velero.yaml'
 readonly ALL_NAMESPACES_URL='https://gist.githubusercontent.com/dmitry-mightydevops/297c4e235b61982f21a0bbbf7319ac24/raw/kubernetes-namespaces.txt'
 
 
@@ -15,7 +14,7 @@ err() {
   local code="$1"
   shift
   echo "[[ERROR]: $(date +'%Y-%m-%dT%H:%M:%S%z')]: ${*}" >&2
-exit "${code}"
+  exit "${code}"
 }
 
 
@@ -25,7 +24,7 @@ exit "${code}"
 get_file() {
   local url="$1"
   local save_to_var="$2"
-  if ! curl -sSL --head --request GET "${url}" | grep "200" > /dev/null; then
+  if ! curl -sSL --head --request GET "${url}" | grep "HTTP/2\ 200" > /dev/null; then
     err 255 "Error getting ${url}"
   else
     declare -g "$save_to_var=$(curl -sSL "${url}")"
@@ -39,12 +38,12 @@ if ! command -v yq > /dev/null; then
 fi
 
 
-get_file "${VALERO_URL}" "valero"
+get_file "${VELERO_URL}" "VELERO"
 get_file "${ALL_NAMESPACES_URL}" "all_namespaces"
 
 
 # Processing YAML, extracting namespaces being preserved into an array.
-saved_namespaces=$(yq '.spec.source.helm.values | from_yaml | .schedules.[].template.includedNamespaces[]' <<< "${valero}")
+saved_namespaces=$(yq '.spec.source.helm.values | from_yaml | .schedules.[].template.includedNamespaces[]' <<< "${VELERO}")
 
 
 # We output only those namespaces that are not present in the array of saved namespaces.
