@@ -1,0 +1,54 @@
+✦12 ➜ curl -v https://camp-python.local/hello\?tech_stack\=php
+*   Trying 127.0.1.1:443...
+* Connected to camp-python.local (127.0.1.1) port 443 (#0)
+* ALPN: offers h2
+* ALPN: offers http/1.1
+*  CAfile: /etc/ssl/certs/ca-certificates.crt
+*  CApath: /etc/ssl/certs
+* TLSv1.0 (OUT), TLS header, Certificate Status (22):
+* TLSv1.3 (OUT), TLS handshake, Client hello (1):
+* TLSv1.2 (IN), TLS header, Certificate Status (22):
+* TLSv1.3 (IN), TLS handshake, Server hello (2):
+* TLSv1.2 (IN), TLS header, Finished (20):
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+* TLSv1.3 (IN), TLS handshake, Encrypted Extensions (8):
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+* TLSv1.3 (IN), TLS handshake, Certificate (11):
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+* TLSv1.3 (IN), TLS handshake, CERT verify (15):
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+* TLSv1.3 (IN), TLS handshake, Finished (20):
+* TLSv1.2 (OUT), TLS header, Finished (20):
+* TLSv1.3 (OUT), TLS change cipher, Change cipher spec (1):
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+* TLSv1.3 (OUT), TLS handshake, Finished (20):
+* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384
+* ALPN: server accepted http/1.1
+* Server certificate:
+*  subject: O=mkcert development certificate; OU=maxim@huawei
+*  start date: Apr 12 05:06:46 2023 GMT
+*  expire date: Jul 12 05:06:46 2025 GMT
+*  subjectAltName: host "camp-python.local" matched cert's "camp-python.local"
+*  issuer: O=mkcert development CA; OU=maxim@huawei; CN=mkcert maxim@huawei
+*  SSL certificate verify ok.
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+> GET /hello?tech_stack=php HTTP/1.1
+> Host: camp-python.local
+> User-Agent: curl/7.85.0
+> Accept: */*
+> 
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+* TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+* TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
+* old SSL session ID is stale, removing
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200 OK
+< Server: nginx/1.22.0 (Ubuntu)
+< Date: Wed, 12 Apr 2023 06:10:54 GMT
+< Content-Type: text/html
+< Content-Length: 14
+< Connection: keep-alive
+< 
+* Connection #0 to host camp-python.local left intact
