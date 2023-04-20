@@ -1,4 +1,7 @@
 #!/bin/bash
+#
+# Task 11 - slow php reporting page
+set -eo pipefail
 
 
 # Check if nginx user exists, create if not
