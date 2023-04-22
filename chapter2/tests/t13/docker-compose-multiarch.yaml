@@ -1,0 +1,12 @@
+version: '3.9'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - BUILDPLATFORM=${BUILDPLATFORM:-linux/amd64}
+    image: rtest12/flatris
+    ports:
+      - "3000:3000"
