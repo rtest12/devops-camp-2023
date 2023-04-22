@@ -1,6 +1,6 @@
 version: '3'
 services:
   app:
-    image: 516f27de17b6
+    image: rtest12/flatris
     ports:
       - "3000:3000"
