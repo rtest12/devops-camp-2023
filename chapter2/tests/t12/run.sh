@@ -3,6 +3,8 @@
 # Task 12 - 500 error handling
 set -eo pipefail
 
+readonly PAUSE_SECONDS='1'
+
 # Check if nginx user exists, create if not
 if ! id -u nginx > /dev/null 2>&1; then
   echo "Creating nginx user..."
@@ -36,7 +38,7 @@ echo "Stopping any running instances of nginx and wsgi..."
 sudo killall wsgi &> /dev/null && sudo killall nginx &> /dev/null
 
 # Wait for services to stop
-sleep 2
+sleep "${PAUSE_SECONDS}"
 
 # Start nginx in foreground mode
 nginx -g "daemon off;" -c "$(pwd)/nginx.conf" &
@@ -46,7 +48,7 @@ nginx -g "daemon off;" -c "$(pwd)/nginx.conf" &
 sudo -u "${SUDO_USER}" uwsgi --ini app.ini --no-orphans
 
 # Wait for services to start
-sleep 2
+sleep "${PAUSE_SECONDS}"
 
 
 # Test with curl
