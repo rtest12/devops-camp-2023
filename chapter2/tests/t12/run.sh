@@ -1,5 +1,7 @@
 #!/bin/bash
-
+#
+# Task 12 - 500 error handling
+set -eo pipefail
 
 # Check if nginx user exists, create if not
 if ! id -u nginx > /dev/null 2>&1; then
