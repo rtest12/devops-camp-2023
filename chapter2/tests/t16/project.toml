@@ -1,0 +1,22 @@
+[project]
+id = "io.buildpacks.php-slow-script"
+name = "buildpacks - slow php reporting page"
+version = "1.0.0"
+BP_PHP_VERSION="8.1.7"
+
+[build]
+exclude = [
+    "README.md",
+    "*.toml"
+]
+
+# include = []
+
+[[ build.env ]]
+name='TEAM'
+value='DEVOPS'
+
+
+[[processes]]
+type = "app"
+command = "/workspace/run.sh"
