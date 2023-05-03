@@ -1,8 +1,8 @@
 ARG NODE_VERSION=14-slim
-ARG NGINX_VERSION=1.22.0-alpine
+ARG ALPINE_VERSION=3.17
 
 # syntax=docker/dockerfile:1.2 
-FROM --platform=${BUILDPLATFORM:-linux/amd64} node:"${NODE_VERSION}" AS builder
+FROM --platform=${BUILDPLATFORM} node:"${NODE_VERSION}" AS builder
 
 RUN apt update
 RUN apt install git -y
@@ -14,7 +14,7 @@ RUN yarn install --arch=$BUILDPLATFORM \
   && yarn test \
   && yarn build
 
-FROM --platform=${BUILDPLATFORM:-linux/amd64} nginx:"${NGINX_VERSION}" AS runtime
+FROM --platform=${BUILDPLATFORM} alpine:"${ALPINE_VERSION}" AS runtime
 RUN apk add yarn
 WORKDIR /opt/flatris
 
