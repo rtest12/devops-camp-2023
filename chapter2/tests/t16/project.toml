@@ -2,7 +2,6 @@
 id = "io.buildpacks.php-slow-script"
 name = "buildpacks - slow php reporting page"
 version = "1.0.0"
-BP_PHP_VERSION="8.1.7"
 
 [build]
 exclude = [
@@ -10,13 +9,22 @@ exclude = [
     "*.toml"
 ]
 
-# include = []
+[[build.env]]
+name='BP_PHP_VERSION'
+value='8.1.*'
 
 [[ build.env ]]
 name='TEAM'
 value='DEVOPS'
 
+[[build.env]]
+name = "BP_NGINX_VERSION"
+value = "1.22.*"
 
-[[processes]]
-type = "app"
-command = "/workspace/run.sh"
+[[build.env]]
+name = "BP_PHP_SERVER"
+value = "nginx"
+
+[[build.env]]
+name = "PHP_NGINX_PATH"
+value = "/workspace/nginx/nginx.conf"
