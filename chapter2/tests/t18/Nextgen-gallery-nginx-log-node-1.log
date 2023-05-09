@@ -1,0 +1,112 @@
+023/05/09 21:21:48 [debug] 1537#1537: *4716 http request line: "GET /wp-content/gallery/camp2023/sea.jpeg HTTP/1.1"
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 http uri: "/wp-content/gallery/camp2023/sea.jpeg"
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 http args: ""
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 http exten: "jpeg"
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 posix_memalign: 0000558528FE8170:4096 @16
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 http process request header line
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 http header: "X-Forwarded-For: 52.220.86.167"
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 http header: "X-Forwarded-Proto: https"
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 http header: "X-Forwarded-Port: 443"
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 http header: "Host: maxim-omelchenko-wordpress.saritasa-camps.link"
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 http header: "X-Amzn-Trace-Id: Root=1-645ab96c-01b4eb9a59cad0956864f32b"
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 http header: "user-agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/112.0"
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 http header: "accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8"
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 http header: "accept-language: en-US,en;q=0.5"
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 http header: "accept-encoding: gzip, deflate, br"
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 http header: "referer: https://maxim-omelchenko-wordpress.saritasa-camps.link/?page_id=58"
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 http header: "upgrade-insecure-requests: 1"
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 http header: "sec-fetch-dest: document"
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 http header: "sec-fetch-mode: navigate"
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 http header: "sec-fetch-site: same-origin"
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 http header: "sec-fetch-user: ?1"
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 http header: "range: bytes=26847-"
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 http header: "if-range: "645a79cb-ceb9""
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 http alloc large header buffer
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 malloc: 0000558528FE9180:8192
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 http large header alloc: 0000558528FE9180 8192
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 http large header copy: 266
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 recv: eof:0, avail:40
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 recv: fd:16 40 of 7926
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 recv: avail:0
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 http header: "cookie: wordpress_test_cookie=WP%20Cookie%20check; wordpress_logged_in_4d55afb43fe8f89e821fa836ab77b2b1=maxim-omelchenko%7C1683836647%7CF2vWeoY9RYAN36kNRtnqCoU0ykAA3Uz1L7NCdlg9NXE%7Cee7c2390e7fe8d92a39f846a57c2d22e53965858fb69d47da7c7570321b38c54; wp-settings-1=mfold%3Do; wp-settings-time-1=1683663848"
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 http header done
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 event timer del: 16: 15888022
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 generic phase: 0
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 rewrite phase: 1
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 test location: "/"
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 test location: "favicon.ico"
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 test location: "robots.txt"
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 test location: ~ "^/.*\.(js)$"
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 test location: ~ "^/.*\.(css)$"
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 test location: ~ "\.php$"
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 test location: ~ "\.(js|css|png|jpg|jpeg|gif|ico)$"
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 using configuration "\.(js|css|png|jpg|jpeg|gif|ico)$"
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 http cl:-1 max:52428800
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 rewrite phase: 3
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 post rewrite phase: 4
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 generic phase: 5
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 generic phase: 6
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 generic phase: 7
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 generic phase: 8
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 access phase: 9
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 access phase: 10
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 access phase: 11
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 post access phase: 12
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 generic phase: 13
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 generic phase: 14
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 content phase: 15
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 content phase: 16
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 content phase: 17
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 content phase: 18
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 content phase: 19
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 content phase: 20
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 http filename: "/var/www/html/wp-content/gallery/camp2023/sea.jpeg"
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 add cleanup: 0000558528FF3960
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 http static fd: 17
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 http set discard body
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 http ir:"645a79cb-ceb9" etag:"645a79cb-ceb9"
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 HTTP/1.1 206 Partial Content
+Server: nginx/1.22.1
+Date: Tue, 09 May 2023 21:21:48 GMT
+Content-Type: image/jpeg
+Content-Length: 26074
+Last-Modified: Tue, 09 May 2023 16:50:19 GMT
+Connection: keep-alive
+ETag: "645a79cb-ceb9"
+Expires: Thu, 31 Dec 2037 23:55:55 GMT
+Cache-Control: max-age=315360000
+Content-Range: bytes 26847-52920/52921
+
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 write new buf t:1 f:0 0000558528FE87B0, pos 0000558528FE87B0, size: 347 file: 0, size: 0
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 http write filter: l:0 f:0 s:347
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 http output filter "/wp-content/gallery/camp2023/sea.jpeg?"
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 http range body buf: 0-52921
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 http copy filter: "/wp-content/gallery/camp2023/sea.jpeg?"
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 http postpone filter "/wp-content/gallery/camp2023/sea.jpeg?" 0000558528FE8920
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 write old buf t:1 f:0 0000558528FE87B0, pos 0000558528FE87B0, size: 347 file: 0, size: 0
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 write new buf t:0 f:1 0000000000000000, pos 0000000000000000, size: 0 file: 26847, size: 26074
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 http write filter: l:1 f:0 s:26421
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 http write filter limit 2097152
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 writev: 347 of 347
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 sendfile: @26847 26074
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 sendfile: 26074 of 26074 @26847
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 http write filter 0000000000000000
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 http copy filter: 0 "/wp-content/gallery/camp2023/sea.jpeg?"
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 http finalize request: 0, "/wp-content/gallery/camp2023/sea.jpeg?" a:1, c:1
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 set http keepalive handler
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 http close request
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 http log handler
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 run cleanup: 0000558528FF3960
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 file cleanup: fd:17
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 free: 0000558528FF29B0, unused: 8
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 free: 0000558528FE8170, unused: 1677
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 free: 0000558528FE2450
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 hc free: 0000000000000000
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 hc busy: 0000558529002838 1
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 free: 0000558528FE9180
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 tcp_nodelay
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 reusable connection: 1
+2023/05/09 21:21:48 [debug] 1537#1537: *4716 event timer add: 16: 3000:15831022
+2023/05/09 21:21:48 [debug] 1537#1537: timer delta: 0
+2023/05/09 21:21:48 [debug] 1537#1537: worker cycle
+2023/05/09 21:21:48 [debug] 1537#1537: epoll timer: 3000
