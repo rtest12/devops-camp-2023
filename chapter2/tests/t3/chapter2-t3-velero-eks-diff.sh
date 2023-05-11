@@ -38,15 +38,15 @@ backup_namespaces=$(get_file "${VELERO_URL}")
 all_namespaces=$(get_file "${ALL_NAMESPACES_URL}")
 
 # Convert the output to an array.
-readarray -t backup_namespaces_array <<< "$backup_namespaces"
+#readarray -t backup_namespaces_array <<< "$backup_namespaces"
 
 # Process the backup namespaces YAML, and extract the included namespaces.
-saved_namespaces=$(yq '.schedules.[].template.includedNamespaces[]' <<< "${backup_namespaces_array}")
+saved_namespaces=$(yq '.spec.source.helm.values | from_yaml | .schedules.[].template.includedNamespaces[]' <<< "${backup_namespaces}")
 
 
 # We output only those namespaces that are not present in the array of saved namespaces.
 for namespace in ${all_namespaces[@]}; do
-  if [[ ! "${backup_namespaces[@]}" =~ "${namespace}" ]]; then
+  if [[ ! "${saved_namespaces[@]}" =~ "${namespace}" ]]; then
     echo "${namespace}"
   fi
 done | sort -u
