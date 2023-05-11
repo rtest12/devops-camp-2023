@@ -1,0 +1,129 @@
+2023/05/09 21:17:15 [debug] 13199#13199: epoll: fd:10 ev:0001 d:00007FE086C56010
+2023/05/09 21:17:15 [debug] 13199#13199: accept on 0.0.0.0:80, ready: 0
+2023/05/09 21:17:15 [debug] 13199#13199: posix_memalign: 00005561DAB22C70:512 @16
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 accept: 172.31.5.199:43108 fd:6
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 event timer add: 6: 60000:14583277
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 reusable connection: 1
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 epoll add event: fd:6 op:1 ev:80002001
+2023/05/09 21:17:15 [debug] 13199#13199: timer delta: 158864
+2023/05/09 21:17:15 [debug] 13199#13199: worker cycle
+2023/05/09 21:17:15 [debug] 13199#13199: epoll timer: 60000
+2023/05/09 21:17:15 [debug] 13199#13199: epoll: fd:6 ev:0001 d:00007FE086C561F1
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 http wait request handler
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 malloc: 00005561DAB25450:1024
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 recv: eof:0, avail:-1
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 recv: fd:6 1024 of 1024
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 recv: avail:74
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 reusable connection: 0
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 posix_memalign: 00005561DAB371A0:4096 @16
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 http process request line
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 http request line: "GET /wp-content/gallery/camp2023/sea.jpeg HTTP/1.1"
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 http uri: "/wp-content/gallery/camp2023/sea.jpeg"
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 http args: ""
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 http exten: "jpeg"
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 posix_memalign: 00005561DAB381B0:4096 @16
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 http process request header line
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 http header: "X-Forwarded-For: 52.220.86.167"
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 http header: "X-Forwarded-Proto: https"
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 http header: "X-Forwarded-Port: 443"
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 http header: "Host: maxim-omelchenko-wordpress.saritasa-camps.link"
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 http header: "X-Amzn-Trace-Id: Root=1-645ab85b-2acc7e39188d4bae63f16594"
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 http header: "user-agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/112.0"
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 http header: "accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8"
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 http header: "accept-language: en-US,en;q=0.5"
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 http header: "accept-encoding: gzip, deflate, br"
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 http header: "referer: https://maxim-omelchenko-wordpress.saritasa-camps.link/?page_id=58"
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 http header: "upgrade-insecure-requests: 1"
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 http header: "sec-fetch-dest: document"
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 http header: "sec-fetch-mode: navigate"
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 http header: "sec-fetch-site: same-origin"
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 http header: "sec-fetch-user: ?1"
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 http header: "if-modified-since: Tue, 09 May 2023 16:50:19 GMT"
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 http header: "if-none-match: "645a79cb-ceb9""
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 http alloc large header buffer
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 malloc: 00005561DAB2B170:8192
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 http large header alloc: 00005561DAB2B170 8192
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 http large header copy: 232
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 recv: eof:0, avail:74
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 recv: fd:6 74 of 7960
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 recv: avail:0
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 http header: "cookie: wordpress_test_cookie=WP%20Cookie%20check; wordpress_logged_in_4d55afb43fe8f89e821fa836ab77b2b1=maxim-omelchenko%7C1683836647%7CF2vWeoY9RYAN36kNRtnqCoU0ykAA3Uz1L7NCdlg9NXE%7Cee7c2390e7fe8d92a39f846a57c2d22e53965858fb69d47da7c7570321b38c54; wp-settings-1=mfold%3Do; wp-settings-time-1=1683663848"
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 http header done
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 event timer del: 6: 14583277
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 generic phase: 0
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 rewrite phase: 1
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 test location: "/"
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 test location: "favicon.ico"
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 test location: "robots.txt"
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 test location: ~ "^/.*\.(js)$"
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 test location: ~ "^/.*\.(css)$"
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 test location: ~ "\.php$"
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 test location: ~ "\.(js|css|png|jpg|jpeg|gif|ico)$"
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 using configuration "\.(js|css|png|jpg|jpeg|gif|ico)$"
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 http cl:-1 max:52428800
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 rewrite phase: 3
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 post rewrite phase: 4
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 generic phase: 5
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 generic phase: 6
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 generic phase: 7
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 generic phase: 8
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 access phase: 9
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 access phase: 10
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 access phase: 11
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 post access phase: 12
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 generic phase: 13
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 generic phase: 14
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 content phase: 15
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 content phase: 16
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 content phase: 17
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 content phase: 18
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 content phase: 19
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 content phase: 20
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 http filename: "/var/www/html/wp-content/gallery/camp2023/sea.jpeg"
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 add cleanup: 00005561DAB38160
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 http static fd: 9
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 http set discard body
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 http ims:1683651019 lm:1683651019
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 http im:""645a79cb-ceb9"" etag:"645a79cb-ceb9"
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 HTTP/1.1 304 Not Modified
+Server: nginx/1.22.1
+Date: Tue, 09 May 2023 21:17:15 GMT
+Last-Modified: Tue, 09 May 2023 16:50:19 GMT
+Connection: keep-alive
+ETag: "645a79cb-ceb9"
+Expires: Thu, 31 Dec 2037 23:55:55 GMT
+Cache-Control: max-age=315360000
+
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 write new buf t:1 f:0 00005561DAB38748, pos 00005561DAB38748, size: 255 file: 0, size: 0
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 http write filter: l:1 f:0 s:255
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 http write filter limit 2097152
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 writev: 255 of 255
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 http write filter 0000000000000000
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 http finalize request: 0, "/wp-content/gallery/camp2023/sea.jpeg?" a:1, c:1
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 set http keepalive handler
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 http close request
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 http log handler
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 run cleanup: 00005561DAB38160
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 file cleanup: fd:9
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 free: 00005561DAB371A0, unused: 8
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 free: 00005561DAB381B0, unused: 2101
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 free: 00005561DAB25450
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 hc free: 0000000000000000
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 hc busy: 00005561DAB22E48 1
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 free: 00005561DAB2B170
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 tcp_nodelay
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 reusable connection: 1
+2023/05/09 21:17:15 [debug] 13199#13199: *2612 event timer add: 6: 3000:14526277
+2023/05/09 21:17:15 [debug] 13199#13199: timer delta: 0
+2023/05/09 21:17:15 [debug] 13199#13199: worker cycle
+2023/05/09 21:17:15 [debug] 13199#13199: epoll timer: 3000
+2023/05/09 21:17:18 [debug] 13199#13199: timer delta: 3005
+2023/05/09 21:17:18 [debug] 13199#13199: *2612 event timer del: 6: 14526277
+2023/05/09 21:17:18 [debug] 13199#13199: *2612 http keepalive handler
+2023/05/09 21:17:18 [debug] 13199#13199: *2612 close http connection: 6
+2023/05/09 21:17:18 [debug] 13199#13199: *2612 reusable connection: 0
+2023/05/09 21:17:18 [debug] 13199#13199: *2612 free: 0000000000000000
+2023/05/09 21:17:18 [debug] 13199#13199: *2612 free: 0000000000000000
+2023/05/09 21:17:18 [debug] 13199#13199: *2612 free: 00005561DAB22C70, unused: 24
+2023/05/09 21:17:18 [debug] 13199#13199: worker cycle
+2023/05/09 21:17:18 [debug] 13199#13199: epoll timer: -1
