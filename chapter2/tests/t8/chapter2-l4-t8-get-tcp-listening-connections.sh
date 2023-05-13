@@ -2,59 +2,52 @@
 # Task 8 - display new tcp listening connections in the range 10000-10100
 set -eo pipefail
 
-# set the port range and others constants
-readonly PORT_RANGE_START='10000'
-readonly PORT_RANGE_END='10100'
-readonly SLEEP_SECONDS='4'
-# port range expr
-export port_range="sport >= :$PORT_RANGE_START and sport <= :$PORT_RANGE_END"
+# Set the port range
+readonly port_range_start='10000'
+readonly port_range_end='10100'
+export port_range="sport >= :$port_range_start and sport <= :$port_range_end"
 
-# list all tcp connections in the port range
-ss_output() {
-  ss -tan "${port_range}" | awk '{printf "%-20s %-20s\n", $4, $5}'
+print_no_connections() {
+  echo "No TCP listening sockets found bound to ports in 10000-10100 range"
+  sleep 3
 }
 
-# Initialize the list of existing and new connections
-EXISTING_CONNECTIONS=$(ss_output)
-NEW_CONNECTIONS_LIST=()
+# Function to get the list of TCP connections in port range, without header
+get_connections() {
+  ss -tan "${port_range}" | awk 'NR>1 {printf "%-20s %-20s\n", $4, $5}'
+}
 
-# Loop until there are no more new connections
-while :
-do
-  # Get the list of TCP listening sockets in the specified port range
-  NEW_CONNECTIONS=$(ss_output)
-    while [[ -z $(ss -ltnp -at "${port_range}" | grep -v "State") ]]
-  do
-    # If there are no listening connections, print a message and wait for N seconds
-    echo "No TCP listening sockets found bound to ports in 10000-10100 range"
-    sleep "${SLEEP_SECONDS}"
-  done
-  # Iterate over each new connection
-  while read -r NEW_CONNECTION
-  do
-    # Check if the new connection is already in the list of existing connections
-    if ! [[ "${EXISTING_CONNECTIONS[*]}" =~ "${NEW_CONNECTION}" ]]
-    then
-      # If the new connection is not in the list of existing connections, add it to the list of new connections
-      NEW_CONNECTIONS_LIST+=("${NEW_CONNECTION}")
-    fi
-  done <<< "${NEW_CONNECTIONS}"
-  
-  # If there are new connections, display them for N seconds and add them to the list of existing connections
-  if [ ${#NEW_CONNECTIONS_LIST[@]} -ne 0 ]; then
-    clear
-    echo -e "New connections:\nLocal Address:Port   Peer Address:Port"
-    for CONNECTION in "${NEW_CONNECTIONS_LIST[@]}"; do
-      echo "${CONNECTION}"
-      EXISTING_CONNECTIONS+=("${CONNECTION}")
-    done
-    NEW_CONNECTIONS_LIST=()
-    sleep "${SLEEP_SECONDS}"
-  else
-    # If there are no new connections, display the list of existing connections
-    clear
-    echo "Existing connections:"
-    ss_output
-    sleep 1
+connections="$(get_connections)"
+
+# If there are no listening connections, print a message, owerwise show connections
+if [ -z "${connections}" ]; then
+  print_no_connections
+else
+  echo "Local Address:Port    Peer Address:Port"
+  echo "${connections}"
+fi
+
+# Loop to append connections
+while true; do
+  new_connections="$(get_connections)"
+
+  if [ -z "${new_connections}" ]; then
+    print_no_connections
+    connections="${new_connections}"
   fi
+
+  # If there were no connections before but now there are, print the header again
+  if [ -z "${connections}" ] && [ -n "${new_connections}" ]; then
+    echo "Local Address:Port    Peer Address:Port"
+  fi
+
+  # Compare the new list of connections with the old one and print the unique ones in new_connections
+  unique_connections=$(comm -13 <(echo "${connections}" | sort) <(echo "${new_connections}" | sort))
+
+  if [ -n "${unique_connections}" ]; then
+    echo "${unique_connections}"
+  fi
+
+  connections="${new_connections}"
+
 done
