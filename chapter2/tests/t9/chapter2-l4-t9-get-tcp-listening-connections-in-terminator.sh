@@ -40,14 +40,14 @@ get_tcp() {
 
 
     # If there were no connections before but now there are, print the header again
-    if [ -z "${connections}" ] && [ -n "${new_connections}" ]; then
+    if [[ -z "${connections}" ]] && [[ -n "${new_connections}" ]]; then
       echo "Local Address:Port    Peer Address:Port"
     fi
 
     # Compare the new list of connections with the old one and print the unique ones in new_connections
     unique_connections=$(comm -13 <(echo "${connections}" | sort) <(echo "${new_connections}" | sort))
 
-    if [ -n "${unique_connections}" ]; then
+    if [[ -n "${unique_connections}" ]]; then
       echo "${unique_connections}"
     fi
 
@@ -60,7 +60,9 @@ get_tcp() {
 while true; do
     # Retrieve all addresses of Terminator pseudo-interfaces
     pseudo_addresses=$(for pid in $(pgrep -P $(pgrep terminator)); do
-        readlink /proc/$pid/fd/0
+        if [[ "$(readlink /proc/$pid/exe)" =~ "zsh" ]]; then
+          readlink /proc/$pid/fd/0
+        fi
     done | sort)
 
     # Use comm to identify new addresses
