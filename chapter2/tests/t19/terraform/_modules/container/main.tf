@@ -17,9 +17,4 @@ resource "docker_container" "cont" {
       container_path = var.container_volume_path
     }
   }
-  provisioner "local-exec" {
-    command     = "./delete_folder.sh"
-    working_dir = path.module
-    when        = destroy
-  }
 }

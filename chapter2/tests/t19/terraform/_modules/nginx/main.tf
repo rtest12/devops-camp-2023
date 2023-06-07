@@ -8,12 +8,22 @@ module "container" {
   client                    = var.client
   project                   = var.project
   environment               = var.environment
-  container_volume_hostpath = "${abspath(path.root)}/../../${var.environment}"
+  container_volume_hostpath = "${path.cwd}/${var.environment}"
   container_volume_path     = "/usr/share/nginx/html"
 }
 
 resource "null_resource" "index_page" {
   provisioner "local-exec" {
-    command = "mkdir ../../${var.environment} && cat > ../../${var.environment}/index.html  <<EOL\n${local.rendered_index_html}\nEOL"
+    command = "mkdir ${path.cwd}/${var.environment} && cat > ${path.cwd}/${var.environment}/index.html  <<EOL\n${local.rendered_index_html}\nEOL"
+  }
+}
+
+resource "null_resource" "delete_folder" {
+  triggers = {
+    folder_name = "${path.cwd}/${var.environment}"
+  }
+  provisioner "local-exec" {
+    when    = destroy
+    command = "rm -rf ${self.triggers.folder_name}"
   }
 }

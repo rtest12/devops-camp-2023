@@ -100,3 +100,12 @@ variable "container_volume_path" {
   default     = ""
   type        = string
 }
+
+variable "container_name" {
+  description = "Value of the name for the Docker container"
+  type        = string
+  validation {
+    condition     = can(regex("^(saritasa-devops-camps-2023-).*", var.container_name))
+    error_message = "Container name should be prefixed with saritasa-devops-camps-2023-"
+  }
+}

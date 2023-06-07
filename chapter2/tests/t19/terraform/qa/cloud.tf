@@ -4,7 +4,7 @@ terraform {
 
     workspaces {
       tags = [
-        "owner:test-student-user",
+        "owner:maxim-omelchenko",
         "lecture:environments",
         "env:qa"
       ]
