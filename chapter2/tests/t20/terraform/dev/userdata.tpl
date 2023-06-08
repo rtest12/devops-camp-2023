@@ -27,14 +27,14 @@ sudo pip3 install botocore
 sudo mkdir /efs
 cd /efs
 sudo chmod go+rw .
-#sudo mount -t efs -o tls ${EFS_ID}:/ .
+#sudo mount -t efs -o tls ${efs_id}:/ .
 sudo mkdir -p /etc/fsdata
 
 # Write EFS ID to /etc/fsdata/fs_tld
-echo "${EFS_ID}" | sudo tee /etc/fsdata/fs_tld > /dev/null
+echo "${efs_id}" | sudo tee /etc/fsdata/fs_tld > /dev/null
 
 # Add EFS mount information to /etc/fstab
-echo "${EFS_ID}.efs.us-east-2.amazonaws.com:/ /efs efs defaults,_netdev,tls,iam 0 0" | sudo tee -a /etc/fstab > /dev/null
+echo "${efs_id}.efs.us-east-2.amazonaws.com:/ /efs efs defaults,_netdev,tls,iam 0 0" | sudo tee -a /etc/fstab > /dev/null
 sudo mount -a
 
 # install wordpress
@@ -93,28 +93,28 @@ EOF
 cat > /efs/wordpress/wp-config.php <<EOF
 <?php
 
-define( 'DB_NAME', '${DB_NAME}' );
-define( 'DB_USER', '${DB_USER}' );
-define( 'DB_PASSWORD', '${DB_PASSWORD}' );
-define( 'DB_HOST', '${DB_HOST}' );
+define( 'DB_NAME', '${db_name}' );
+define( 'DB_USER', '${db_user}' );
+define( 'DB_PASSWORD', '${db_password}' );
+define( 'DB_HOST', '${db_host}' );
 define( 'DB_CHARSET', 'utf8' );
 define( 'DB_COLLATE', '' );
 
-define( 'AUTH_KEY',         '${AUTH_KEY}' );
-define( 'SECURE_AUTH_KEY',  '${SECURE_AUTH_KEY}' );
-define( 'LOGGED_IN_KEY',    '${LOGGED_IN_KEY}' );
-define( 'NONCE_KEY',        '${NONCE_KEY}' );
-define( 'AUTH_SALT',        '${AUTH_SALT}' );
-define( 'SECURE_AUTH_SALT', '${SECURE_AUTH_SALT}' );
-define( 'LOGGED_IN_SALT',   '${LOGGED_IN_SALT}' );
-define( 'NONCE_SALT',       '${NONCE_SALT}' );
+define( 'AUTH_KEY',         '${auth_key}' );
+define( 'SECURE_AUTH_KEY',  '${secure_auth_key}' );
+define( 'LOGGED_IN_KEY',    '${logged_in_key}' );
+define( 'NONCE_KEY',        '${nonce_key}' );
+define( 'AUTH_SALT',        '${auth_salt}' );
+define( 'SECURE_AUTH_SALT', '${secure_auth_salt}' );
+define( 'LOGGED_IN_SALT',   '${logged_in_salt}' );
+define( 'NONCE_SALT',       '${nonce_salt}' );
 
 define( 'WP_DEBUG', true);
 define( 'DISALLOW_FILE_EDIT', false);
 define( 'WP_TIMEOUT_NONCE', 60 * 60 * 24 );
 define( 'FS_METHOD', 'direct');
-define('WP_HOME','https://${SITE_URL}');
-define('WP_SITEURL','https://${SITE_URL}');
+define('WP_HOME','https://${site_url}');
+define('WP_SITEURL','https://${site_url}');
 
 if (\$_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')
           \$_SERVER['HTTPS']='on';
@@ -137,4 +137,4 @@ sudo mv wp-cli.phar /usr/local/bin/wp
 cd wordpress
 sudo mkdir wp-content/uploads
 sudo chmod 755 wp-content/uploads
-wp core install --url="https://${SITE_URL}" --title="My WordPress Terraform Task" --admin_user="admin" --admin_password="${WORDPRESS_PASSWORD}" --admin_email="admin@${SITE_URL}"
+wp core install --url="https://${site_url}" --title="My WordPress Terraform Task" --admin_user="admin" --admin_password="${wordpress_password}" --admin_email="admin@${site_url}"

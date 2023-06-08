@@ -9,18 +9,29 @@ environment = "staging"
 
 /* 
   ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-  │ redis configuration variables                                                                                    │
+  │ configuration variables                                                                                    │
   └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
  */
 
-cache_vpc_tags = {
+vpc_tags = {
   Name = "default"
 }
 
-cache_availability_zones   = ["us-east-2a"]
-cache_engine               = "redis"
-cache_engine_version       = "6.x"
-cache_node_type            = "cache.t3.micro"
-cache_node_count           = 1
-cache_parameter_group_name = "default.redis6.x"
-cache_port                 = 6379
+availability_zones            = ["us-east-2a", "us-east-2b", "us-east-2c"]
+wordpress_ec2_instances_count = 2
+ami_id                        = "ami-01107263728f3bef4"
+instance_type                 = "t3.micro"
+
+/* 
+  ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ rds db variables                                                                                    │
+  └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+ */
+
+rds_engine                = "mysql"
+rds_family                = "mysql8.0"
+rds_major_engine_version  = "8.0"
+rds_engine_version        = "8.0"
+rds_instance_class        = "db.t4g.micro"
+rds_allocated_storage     = 20
+rds_max_allocated_storage = 1000

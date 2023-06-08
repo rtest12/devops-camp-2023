@@ -1,19 +1,16 @@
-module "records" {
-  source  = "terraform-aws-modules/route53/aws//modules/records"
-  version = "~> 2.0"
+resource "aws_route53_record" "records" {
   zone_id = data.aws_route53_zone.domain.zone_id
-  records = [
-    {
-      name      = var.subdomain_url
-      type      = "A"
-      alias     = {
-        name    = module.alb.lb_dns_name
-        zone_id = module.alb.lb_zone_id
-        evaluate_target_health = true
-      }
-    },
-  ]
+  name    = var.site_subdomain_part
+  type    = "A"
+
+  alias {
+    name                   = module.alb.lb_dns_name
+    zone_id                = module.alb.lb_zone_id
+    evaluate_target_health = true
+  }
+  depends_on = [module.alb]
 }
+
 
 resource "aws_route53_record" "tf-maxim-omelchenko" {
   for_each = {
