@@ -8,8 +8,8 @@ module "efs" {
   tags             = var.tags
   mount_targets = [
     for az_index, az_name in data.aws_availability_zones.available.names : {
-      subnet_id          = data.aws_subnets.wordpress.ids[az_index]
-      availability_zone  = az_name
+      subnet_id         = data.aws_subnets.wordpress.ids[az_index]
+      availability_zone = az_name
     }
   ]
   attach_policy              = false

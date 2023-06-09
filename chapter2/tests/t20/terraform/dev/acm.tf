@@ -14,5 +14,4 @@ resource "aws_acm_certificate" "tf-maxim-omelchenko" {
 resource "aws_acm_certificate_validation" "cert" {
   certificate_arn         = aws_acm_certificate.tf-maxim-omelchenko.arn
   validation_record_fqdns = values(aws_route53_record.tf-maxim-omelchenko)[*].fqdn
-  #  validation_record_fqdns = [for record in aws_route53_record.tf-maxim-omelchenko : record.fqdn]
 }

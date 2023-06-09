@@ -1,9 +1,9 @@
 module "ec2_instances" {
-  source        = "terraform-aws-modules/ec2-instance/aws"
-  count         = var.ec2_instances_count
-  name          = "${local.labels.ec2_instance}-${count.index + 1}"
-  ami           = var.ec2_ami_id
-  instance_type = var.ec2_instance_type
+  source                 = "terraform-aws-modules/ec2-instance/aws"
+  count                  = var.ec2_instances_count
+  name                   = "${local.labels.ec2_instance}-${count.index + 1}"
+  ami                    = var.ec2_ami_id
+  instance_type          = var.ec2_instance_type
   key_name               = aws_key_pair.wordpress_cluster.key_name
   vpc_security_group_ids = [module.wordpress_ec2_sg.security_group_id]
   iam_instance_profile   = "ssm-role"
@@ -33,5 +33,5 @@ module "ec2_instances" {
       volume_type = var.ec2_volume_type
     }
   ]
-  depends_on = [module.wordpress_mysql_rds]
+  depends_on = [module.wordpress_mysql_rds, aws_key_pair.wordpress_cluster]
 }
