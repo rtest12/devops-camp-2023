@@ -25,6 +25,9 @@ sudo pip3 install botocore
 
 # efs
 sudo mkdir /efs
+cd /efs
+sudo chmod go+rw .
+#sudo mount -t efs -o tls ${efs_id}:/ .
 sudo mkdir -p /etc/fsdata
 
 # Write EFS ID to /etc/fsdata/fs_tld
@@ -33,6 +36,11 @@ echo "${efs_id}" | sudo tee /etc/fsdata/fs_tld > /dev/null
 # Add EFS mount information to /etc/fstab
 echo "${efs_id}.efs.us-east-2.amazonaws.com:/ /efs efs defaults,_netdev,tls,iam 0 0" | sudo tee -a /etc/fstab > /dev/null
 sudo mount -a
+
+# install wordpress
+wget https://wordpress.org/latest.zip
+unzip latest.zip
+rm -rf latest.zip
 
 # create nginx config
 cat > /etc/nginx/nginx.conf <<EOF
@@ -49,7 +57,6 @@ http {
         default_type       application/octet-stream;
         sendfile           on;
         keepalive_timeout  3;
-        access_log  /var/log/nginx/access.log;
 
         upstream php {
           server unix:/run/php-fpm/www.sock;
@@ -64,7 +71,7 @@ http {
                 types_hash_max_size 2048;
                 types_hash_bucket_size 128;
 
-                location ~ \.php$ {
+                location ~ \.php\$ {
                         include fastcgi_params;
                         fastcgi_intercept_errors on;
                         fastcgi_pass php;
@@ -74,30 +81,13 @@ http {
                 }
 
                 location /admin {
-                        rewrite ^/admin(.*)$ /wp-admin\$1 last;
+                        rewrite ^/admin(.*)\$ /wp-admin\$1 last;
                 }
 
         }
 }
+
 EOF
-
-sudo systemctl restart nginx
-
-# install wordpress
-cd /efs
-
-if [ ! -d "wordpress" ]; then
-  sudo mkdir wordpress
-else
-  # If the efs wordpress directory already exists, it means that the installation is already being performed by another EC2 instance, so we exit.
-  exit 1
-fi
-
-sudo chown ssm-user:ssm-user wordpress/
-sudo chmod go+rw wordpress
-wget https://wordpress.org/latest.zip
-unzip latest.zip
-rm -rf latest.zip
 
 # create wordpress config
 cat > /efs/wordpress/wp-config.php <<EOF
@@ -139,6 +129,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 require_once ABSPATH . 'wp-settings.php';
 EOF
 
+sudo systemctl restart nginx
+
 sudo curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 sudo chmod +x wp-cli.phar
 sudo mv wp-cli.phar /usr/local/bin/wp
@@ -146,4 +138,3 @@ cd wordpress
 sudo mkdir wp-content/uploads
 sudo chmod 755 wp-content/uploads
 wp core install --url="https://${site_url}" --title="My WordPress Terraform Task" --admin_user="admin" --admin_password="${wordpress_password}" --admin_email="admin@${site_url}"
-sudo chown -R nginx:nginx .

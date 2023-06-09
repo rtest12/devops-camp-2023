@@ -5,12 +5,14 @@ resource "null_resource" "execute_commands" {
     connection {
       type        = "ssh"
       user        = "ec2-user"
-      private_key = file("${path.cwd}/assets/private_keys/wordpress_cluster.pem")
-      host        = each.value.public_ip
+#      private_key = file("${path.cwd}/assets/private_keys/cluster.pem")
+      private_key = aws_key_pair.wordpress_cluster.key_pair_id
+      host        = each.value.public_ips
     }
 
     inline = [
-      "echo 'Hello, Camp!'"
+      "echo 'Hello, Camp!'",
+      "sudo yum update"
     ]
   }
 }

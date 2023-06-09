@@ -107,11 +107,6 @@ variable "ec2_volume_type" {
   default = "gp3"
 }
 
-variable "allowed_ssh_ip" {
-  description = "Allowed IP address for SSH access"
-  type        = string
-}
-
 /* 
   ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
   │ env=specific configuration variables                                                                             │
@@ -154,12 +149,6 @@ variable "vpc_tags" {
     Name = "default"
   }
 }
-
-/* 
-  ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-  │ ssh                                                                             │
-  └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
- */
 
 variable "ssh_cluster_name" {
   type = string

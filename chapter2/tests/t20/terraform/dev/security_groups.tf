@@ -6,16 +6,15 @@ module "wordpress_ec2_sg" {
   vpc_id              = data.aws_vpc.target.id
   ingress_cidr_blocks = [data.aws_vpc.target.cidr_block]
   ingress_rules       = ["all-all"]
-  ingress_with_cidr_blocks = [
-    {
-      rule        = "ssh-tcp"
-      cidr_blocks = var.allowed_ssh_ip
-      description = "ssh access from allowed vpn ip"
-      from_port   = 22
-      to_port     = 22
-      protocol    = "tcp"
-    }
-  ]
+  # ingress_with_cidr_blocks = [
+  #   {
+  #     from_port   = "http-80-tcp"
+  #     to_port     = "http-80-tcp"
+  #     protocol    = "tcp"
+  #     description = "http"
+  #     cidr_blocks = "0.0.0.0/0"
+  #   }
+  # ]
   ingress_with_source_security_group_id = [
     {
       rule                     = "mysql-tcp"
@@ -51,7 +50,13 @@ module "wordpress_alb_sg" {
   description         = "security group for alb"
   vpc_id              = data.aws_vpc.target.id
   ingress_cidr_blocks = ["0.0.0.0/0"]
-  ingress_rules       = ["https-443-tcp"]
-  egress_rules        = ["all-all"]
-  tags                = var.tags
+  ingress_with_source_security_group_id = [
+    {
+      rule                     = "https-443-tcp"
+      source_security_group_id = module.wordpress_ec2_sg.security_group_id
+    },
+  ]
+  # ingress_rules        = ["https-443-tcp"]
+  egress_rules = ["all-all"]
+  tags         = var.tags
 }

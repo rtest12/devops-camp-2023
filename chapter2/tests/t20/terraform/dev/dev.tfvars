@@ -16,7 +16,7 @@ vpc_tags = {
   Name = "default"
 }
 
-availability_zones = ["us-east-2a", "us-east-2b", "us-east-2c"]
+availability_zones            = ["us-east-2a", "us-east-2b", "us-east-2c"]
 
 /* 
   ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
@@ -38,11 +38,11 @@ rds_max_allocated_storage = 1000
   └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
  */
 
-ec2_volume_size     = 20
-ec2_volume_type     = "gp3"
-ec2_instances_count = 2
-ec2_ami_id          = "ami-01107263728f3bef4"
-ec2_instance_type   = "t3.micro"
+ec2_volume_size                   = 20
+ec2_volume_type                   = "gp3"
+ec2_instances_count               = 2
+ec2_ami_id                        = "ami-01107263728f3bef4"
+ec2_instance_type                 = "t3.micro"
 
 /* 
   ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
@@ -51,4 +51,3 @@ ec2_instance_type   = "t3.micro"
  */
 
 ssh_cluster_name = "wordpress_cluster"
-allowed_ssh_ip   = "195.201.120.196/32"
