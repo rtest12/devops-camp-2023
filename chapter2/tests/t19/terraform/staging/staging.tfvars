@@ -14,13 +14,21 @@ environment = "staging"
 
 nginx = {
   image          = "nginx:1.21"
-  container_name = "saritasa-devops-camps-2023-workspace-staging"
+  container_name = "saritasa-devops-camps-2023-workspace-nginx-staging"
   container_ports = {
     internal = 80,
     external = 9090
   }
+  container_volumes = [
+    {
+      # host - in root project folder
+      host      = "staging"
+      container = "/usr/share/nginx/html"
+    }
+  ]
   keep_locally = true
 }
+
 
 /* 
   ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐

@@ -1,4 +1,4 @@
-variable "cont" {
+variable "container_resource" {
   description = "Name of the container"
   type        = string
 }
@@ -17,10 +17,6 @@ variable "container_image_keep_locally" {
 variable "container_name" {
   description = "Value of the name for the Docker container"
   type        = string
-  # validation {
-  #   condition     = can(regex("^(saritasa-devops-camps-2023-).*", var.container_name))
-  #   error_message = "Container name should be prefixed with saritasa-devops-camps-2023-"
-  # }
 }
 
 variable "container_ports" {
@@ -32,16 +28,10 @@ variable "container_ports" {
   }
 }
 
-variable "container_volume_hostpath" {
-  description = "volume host path"
-  default     = ""
-  type        = string
-}
-
-variable "container_volume_path" {
-  description = "volume path in container"
-  default     = ""
-  type        = string
+variable "container_volumes" {
+  description = "A list of volumes to be mounted to the container"
+  type        = list(object({ host = string, container = string }))
+  default     = []
 }
 
 variable "client" {

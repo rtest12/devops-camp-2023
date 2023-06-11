@@ -1,15 +1,14 @@
 module "container" {
-  cont                      = "nginx"
-  source                    = "../container"
-  container_image           = var.container_image
+  container_resource           = "nginx"
+  source                       = "../container"
+  container_image              = var.container_image
   container_image_keep_locally = var.container_image_keep_locally
-  container_name            = var.container_name != null ? var.container_name : ""
-  container_ports           = var.container_ports
-  client                    = var.client
-  project                   = var.project
-  environment               = var.environment
-  container_volume_hostpath = "${path.cwd}/${var.environment}"
-  container_volume_path     = "/usr/share/nginx/html"
+  container_name               = var.container_name != null ? var.container_name : ""
+  container_ports              = var.container_ports
+  client                       = var.client
+  project                      = var.project
+  environment                  = var.environment
+  container_volumes            = var.container_volumes
 }
 
 resource "null_resource" "index_page" {

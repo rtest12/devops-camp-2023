@@ -14,11 +14,18 @@ environment = "prod"
 
 nginx = {
   image          = "nginx:1.21"
-  container_name = "saritasa-devops-camps-2023-workspace-prod"
+  container_name = "saritasa-devops-camps-2023-workspace-nginx-prod"
   container_ports = {
     internal = 80,
     external = 10000
   }
+  container_volumes = [
+    {
+      # host - in root project folder
+      host      = "prod"
+      container = "/usr/share/nginx/html"
+    }
+  ]
   keep_locally = true
 }
 

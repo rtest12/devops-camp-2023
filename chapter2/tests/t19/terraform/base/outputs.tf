@@ -7,7 +7,6 @@ output "nginx" {
   }
 }
 
-
 output "redis" {
   description = "Redis configuration"
   value = var.use_redis ? {

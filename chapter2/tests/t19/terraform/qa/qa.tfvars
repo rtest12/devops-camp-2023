@@ -19,6 +19,13 @@ nginx = {
     internal = 80,
     external = 10000
   }
+  container_volumes = [
+    {
+      # host - in root project folder
+      host      = "qa"
+      container = "/usr/share/nginx/html"
+    }
+  ]
   keep_locally = true
 }
 
@@ -39,4 +46,3 @@ redis = {
   }
   keep_locally = true
 }
-
