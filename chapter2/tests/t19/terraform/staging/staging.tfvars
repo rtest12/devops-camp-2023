@@ -8,7 +8,8 @@ environment = "staging"
 
 /* 
   ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-  │ nginx configuration variables                                                                                    │
+  │ nginx configuration variables                                                                                    |
+  | the host folder in the root directory of the project, the full path is constructed in _modules/container/main.tf │
   └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
  */
 
@@ -21,7 +22,6 @@ nginx = {
   }
   container_volumes = [
     {
-      # host - in root project folder
       host      = "staging"
       container = "/usr/share/nginx/html"
     }

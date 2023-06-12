@@ -1,5 +1,4 @@
 module "container" {
-  container_resource           = "nginx"
   source                       = "../container"
   container_image              = var.container_image
   container_image_keep_locally = var.container_image_keep_locally
@@ -13,7 +12,11 @@ module "container" {
 
 resource "null_resource" "index_page" {
   provisioner "local-exec" {
-    command = "mkdir ${path.cwd}/${var.environment} && cat > ${path.cwd}/${var.environment}/index.html  <<EOL\n${local.rendered_index_html}\nEOL"
+    command = <<EOF
+    mkdir ${path.cwd}/${var.environment} && 
+    cat > ${path.cwd}/${var.environment}/index.html  <<EOL
+    ${local.rendered_index_html}
+    EOF
   }
 }
 

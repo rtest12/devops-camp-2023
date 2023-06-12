@@ -1,8 +1,3 @@
-variable "container_resource" {
-  description = "Name of the container"
-  type        = string
-}
-
 variable "container_image" {
   description = "Value of the name for the Docker container"
   type        = string

@@ -15,11 +15,6 @@ variable "nginx" {
     }))
     keep_locally = bool
   })
-  default = {
-    image             = "nginx:latest"
-    keep_locally      = false
-    container_volumes = []
-  }
   validation {
     condition = (
       can(var.nginx.container_ports) &&
@@ -62,14 +57,6 @@ variable "redis" {
     container_ports = optional(map(string))
     keep_locally    = bool
   })
-  default = {
-    image = "redis:latest"
-    container_ports = {
-      internal = 6379
-      external = 6379
-    }
-    keep_locally = false
-  }
   validation {
     condition = (
       can(var.redis.container_ports) &&

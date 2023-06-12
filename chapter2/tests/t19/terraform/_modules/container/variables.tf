@@ -1,4 +1,4 @@
-variable "container_resource" {
+variable "container_name" {
   description = "Name of the container"
   type        = string
 }
@@ -14,11 +14,6 @@ variable "container_image_keep_locally" {
   default     = false
 }
 
-variable "container_name" {
-  description = "Value of the name for the Docker container"
-  type        = string
-}
-
 variable "container_ports" {
   description = "Value of the name for the Docker container"
   type        = map(any)
@@ -30,8 +25,13 @@ variable "container_ports" {
 
 variable "container_volumes" {
   description = "A list of volumes to be mounted to the container"
-  type        = list(object({ host = string, container = string }))
-  default     = []
+  type = list(
+    object({
+      host      = string,
+      container = string
+    })
+  )
+  default = []
 }
 
 variable "client" {
