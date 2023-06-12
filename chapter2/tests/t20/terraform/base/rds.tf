@@ -33,3 +33,12 @@ module "wordpress_mysql_rds" {
   enabled_cloudwatch_logs_exports     = ["audit", "error", "general", "slowquery"]
   tags                                = var.tags
 }
+
+resource "random_password" "db_password" {
+  length           = 16
+  special          = true
+  override_special = "!#$%&*()-_=+[]{}<>:?"
+  keepers = {
+    db_instance = "${var.client}-${var.environment}"
+  }
+}
