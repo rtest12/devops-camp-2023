@@ -103,28 +103,28 @@ rm -rf latest.zip
 cat > /efs/wordpress/wp-config.php <<EOF
 <?php
 
-define( 'DB_NAME', '${db_name}' );
-define( 'DB_USER', '${db_user}' );
-define( 'DB_PASSWORD', '${db_password}' );
-define( 'DB_HOST', '${db_host}' );
-define( 'DB_CHARSET', 'utf8' );
-define( 'DB_COLLATE', '' );
+define( 'DB_NAME',            '${db_name}' );
+define( 'DB_USER',            '${db_user}' );
+define( 'DB_PASSWORD',        '${db_password}' );
+define( 'DB_HOST',            '${db_host}' );
+define( 'DB_CHARSET',         'utf8' );
+define( 'DB_COLLATE',         '' );
 
-define( 'AUTH_KEY',         '${auth_key}' );
-define( 'SECURE_AUTH_KEY',  '${secure_auth_key}' );
-define( 'LOGGED_IN_KEY',    '${logged_in_key}' );
-define( 'NONCE_KEY',        '${nonce_key}' );
-define( 'AUTH_SALT',        '${auth_salt}' );
-define( 'SECURE_AUTH_SALT', '${secure_auth_salt}' );
-define( 'LOGGED_IN_SALT',   '${logged_in_salt}' );
-define( 'NONCE_SALT',       '${nonce_salt}' );
+define( 'AUTH_KEY',           '${auth_key}' );
+define( 'SECURE_AUTH_KEY',    '${secure_auth_key}' );
+define( 'LOGGED_IN_KEY',      '${logged_in_key}' );
+define( 'NONCE_KEY',          '${nonce_key}' );
+define( 'AUTH_SALT',          '${auth_salt}' );
+define( 'SECURE_AUTH_SALT',   '${secure_auth_salt}' );
+define( 'LOGGED_IN_SALT',     '${logged_in_salt}' );
+define( 'NONCE_SALT',         '${nonce_salt}' );
 
-define( 'WP_DEBUG', true);
+define( 'WP_DEBUG',           true);
 define( 'DISALLOW_FILE_EDIT', false);
-define( 'WP_TIMEOUT_NONCE', 60 * 60 * 24 );
-define( 'FS_METHOD', 'direct');
-define('WP_HOME','https://${site_url}');
-define('WP_SITEURL','https://${site_url}');
+define( 'WP_TIMEOUT_NONCE',   60 * 60 * 24 );
+define( 'FS_METHOD',          'direct');
+define('WP_HOME',             'https://${site_url}');
+define('WP_SITEURL',          'https://${site_url}');
 
 if (\$_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')
           \$_SERVER['HTTPS']='on';

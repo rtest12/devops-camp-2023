@@ -2,10 +2,10 @@ data "aws_availability_zones" "available" {}
 
 module "efs" {
   source           = "terraform-aws-modules/efs/aws"
+  version          = "1.1.1"
   name             = local.labels.efs
   performance_mode = "generalPurpose"
   throughput_mode  = "elastic"
-  tags             = var.tags
   mount_targets = [
     for az_index, az_name in data.aws_availability_zones.available.names : {
       subnet_id         = data.aws_subnets.wordpress.ids[az_index]
@@ -22,4 +22,5 @@ module "efs" {
       source_security_group_id = module.wordpress_ec2_sg.security_group_id
     }
   }
+  tags = var.tags
 }

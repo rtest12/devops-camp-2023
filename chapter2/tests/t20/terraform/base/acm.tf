@@ -1,7 +1,6 @@
-resource "aws_acm_certificate" "tf-maxim-omelchenko" {
+resource "aws_acm_certificate" "certificate" {
   domain_name       = var.site_url
   validation_method = "DNS"
-  tags              = var.tags
   subject_alternative_names = [
     "www.${var.site_url}"
   ]
@@ -9,9 +8,10 @@ resource "aws_acm_certificate" "tf-maxim-omelchenko" {
   lifecycle {
     create_before_destroy = true
   }
+  tags = var.tags
 }
 
-resource "aws_acm_certificate_validation" "cert" {
-  certificate_arn         = aws_acm_certificate.tf-maxim-omelchenko.arn
-  validation_record_fqdns = values(aws_route53_record.tf-maxim-omelchenko)[*].fqdn
+resource "aws_acm_certificate_validation" "certificate_validation" {
+  certificate_arn         = aws_acm_certificate.certificate.arn
+  validation_record_fqdns = values(aws_route53_record.validation_records)[*].fqdn
 }

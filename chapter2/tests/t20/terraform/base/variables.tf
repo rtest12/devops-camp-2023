@@ -1,114 +1,144 @@
 /* 
   ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-  │ rds db vars                                                                             │
+  │ rds db vars                                                                                                      │
   └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
  */
 
 variable "rds_db_user" {
   description = "db rds user"
   type        = string
-  default     = "user_db"
 }
 
 variable "rds_db_name" {
   description = "rds db name"
   type        = string
-  default     = "wordpress_db"
 }
 
-
 variable "rds_engine" {
-  description = "Engine for the RDS instance"
+  description = "engine for the RDS instance"
+  type        = string
 }
 
 variable "rds_family" {
-  description = "Family for the RDS instance"
+  description = "family for the RDS instance"
+  type        = string
 }
 
 variable "rds_major_engine_version" {
-  description = "Major engine version for the RDS instance"
+  description = "major engine version for the RDS instance"
+  type        = string
 }
 
 variable "rds_engine_version" {
-  description = "Engine version for the RDS instance"
+  description = "engine version for the RDS instance"
+  type        = string
 }
 
 variable "rds_instance_class" {
-  description = "Instance class for the RDS instance"
+  description = "instance class for the RDS instance"
+  type        = string
 }
 
 variable "rds_allocated_storage" {
-  description = "Allocated storage for the RDS instance"
+  description = "allocated storage for the RDS instance"
+  type        = number
 }
 
 variable "rds_max_allocated_storage" {
-  description = "Max allocated storage for the RDS instance"
+  description = "max allocated storage for the RDS instance"
+  type        = number
+}
+
+variable "rds_port" {
+  description = "rds port"
+  type        = string
+}
+
+variable "rds_monitoring_interval" {
+  description = "rds monitoring_interval"
+  type        = number
+}
+
+variable "rds_backup_retention_period" {
+  description = "rds backup retention period"
+  type        = number
+}
+
+variable "rds_backup_window" {
+  description = "rds backup window"
+  type        = string
+}
+
+variable "rds_maintenance_window" {
+  description = "rds maintenance window"
+  type        = string
 }
 
 /* 
   ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-  │ efs vars                                                                             │
+  │ efs vars                                                                                                         │
   └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
  */
 
 variable "efs_name" {
-  description = "Name of the EFS file system"
+  description = "name of the efs file system"
   type        = string
-  default     = "wordpress-efs"
 }
 
 /* 
   ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-  │ fqdn vars                                                                             │
+  │ fqdn vars                                                                                                        │
   └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
  */
 
 variable "site_url" {
   description = "site url"
   type        = string
-  default     = "tf-maxim-omelchenko.saritasa-camps.link"
 }
 
 variable "site_subdomain_part" {
   description = "subdomain part name"
   type        = string
-  default     = "tf-maxim-omelchenko"
 }
 
 /* 
   ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-  │ ec2 vars                                                                             │
+  │ ec2 vars                                                                                                         │
   └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
  */
 
 variable "ec2_instances_count" {
+  description = "number of wordPress ec2 instances"
   type        = number
-  description = "Number of WordPress EC2 instances"
-  default     = 2
 }
 
 variable "ec2_ami_id" {
-  type    = string
-  default = "ami-01107263728f3bef4"
+  description = "ec2 instances ami id"
+  type        = string
 }
 
 variable "ec2_instance_type" {
-  type    = string
-  default = "t3.micro"
+  description = "ec2 instances instance type"
+  type        = string
 }
 
 variable "ec2_volume_size" {
-  type    = number
-  default = 20
+  description = "ec2 instances volume size"
+  type        = number
 }
 
 variable "ec2_volume_type" {
-  type    = string
-  default = "gp3"
+  description = "ec2 instances volume type"
+  type        = string
 }
 
-variable "allowed_ssh_ip" {
-  description = "Allowed IP address for SSH access"
+variable "ec2_ssm_role" {
+  description = "ec2 ssm role"
+  type        = string
+}
+
+variable "ec2_user" {
+  description = "ec2 username"
   type        = string
 }
 
@@ -157,10 +187,16 @@ variable "vpc_tags" {
 
 /* 
   ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-  │ ssh                                                                             │
+  │ ssh                                                                                                              │
   └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
  */
 
 variable "ssh_cluster_name" {
-  type = string
+  description = "ssh cluster name"
+  type        = string
+}
+
+variable "allowed_ssh_ip" {
+  description = "allowed ip address for ec2 ssh access"
+  type        = string
 }

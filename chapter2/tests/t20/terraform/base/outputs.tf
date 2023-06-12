@@ -1,12 +1,17 @@
-output "mysql_db_password" {
+output "rds_mysql_password" {
+  sensitive   = true
   description = "mysql database password"
   value       = random_password.db_password.result
-  sensitive   = true
+}
+
+output "rds_mysql_endpoint" {
+  description = "database connection endpoint"
+  value       = module.wordpress_mysql_rds.db_instance_endpoint
 }
 
 output "ec2_instance_ids" {
   description = "list of ec2 instances"
-  value       = [for instance in module.ec2_instances : instance.id]
+  value       = module.wordpress_ec2_instances[*].id
 }
 
 output "alb_url" {
@@ -17,11 +22,6 @@ output "alb_url" {
 output "efs_id" {
   description = "elastic file system id"
   value       = module.efs.id
-}
-
-output "db_endpoint" {
-  description = "database connection endpoint"
-  value       = module.wordpress_mysql_rds.db_instance_endpoint
 }
 
 output "wordpress_fqdn" {

@@ -1,17 +1,17 @@
 module "alb" {
   source             = "terraform-aws-modules/alb/aws"
-  version            = "~> 8.0"
+  version            = "8.6.1"
   name               = local.labels.alb
   load_balancer_type = "application"
   vpc_id             = data.aws_vpc.target.id
   subnets            = data.aws_subnets.wordpress.ids
   security_groups    = [module.wordpress_alb_sg.security_group_id]
-  tags               = var.tags
 
   target_groups = [
     {
-      backend_protocol = "http"
       backend_port     = 80
+      backend_protocol = "http"
+      name             = local.labels.tg
       target_type      = "instance"
       health_check = {
         enabled             = true
@@ -25,7 +25,7 @@ module "alb" {
         matcher             = "200-399"
       }
       targets = {
-        for instance in module.ec2_instances[*].id :
+        for instance in module.wordpress_ec2_instances[*].id :
         "my_target_${instance}" => {
           target_id = instance
           port      = 80
@@ -40,8 +40,13 @@ module "alb" {
       protocol           = "HTTPS"
       target_group_index = 0
       ssl_policy         = "ELBSecurityPolicy-2016-08"
-      certificate_arn    = aws_acm_certificate.tf-maxim-omelchenko.arn
+      certificate_arn    = aws_acm_certificate.certificate.arn
     }
   ]
-  depends_on = [module.ec2_instances, module.wordpress_alb_sg, aws_acm_certificate_validation.cert]
+  tags = var.tags
+  depends_on = [
+    module.wordpress_ec2_instances,
+    module.wordpress_alb_sg,
+    aws_acm_certificate_validation.certificate_validation
+  ]
 }

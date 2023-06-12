@@ -5,7 +5,6 @@ module "wordpress_ec2_sg" {
   description         = "Security group for the ec2 instances"
   vpc_id              = data.aws_vpc.target.id
   ingress_cidr_blocks = [data.aws_vpc.target.cidr_block]
-  ingress_rules       = ["all-all"]
   ingress_with_cidr_blocks = [
     {
       rule        = "ssh-tcp"
@@ -18,9 +17,9 @@ module "wordpress_ec2_sg" {
   ]
   ingress_with_source_security_group_id = [
     {
-      rule                     = "mysql-tcp"
-      source_security_group_id = module.wordpress_rds_sg.security_group_id
-      description              = "mysql from rds"
+      rule                     = "http-80-tcp"
+      source_security_group_id = module.wordpress_alb_sg.security_group_id
+      description              = "allow http from alb"
     }
   ]
   egress_rules = ["all-all"]
@@ -38,7 +37,7 @@ module "wordpress_rds_sg" {
     {
       rule                     = "mysql-tcp"
       source_security_group_id = module.wordpress_ec2_sg.security_group_id
-    },
+    }
   ]
   egress_rules = ["all-all"]
   tags         = var.tags

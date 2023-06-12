@@ -1,5 +1,6 @@
 module "wordpress_mysql_rds" {
   source                = "terraform-aws-modules/rds/aws"
+  version               = "5.9.0"
   identifier            = local.labels.rds
   engine                = var.rds_engine
   family                = var.rds_family
@@ -14,23 +15,21 @@ module "wordpress_mysql_rds" {
   username               = var.rds_db_user
   create_random_password = false
   password               = random_password.db_password.result
-  port                   = "3306"
+  port                   = var.rds_port
 
   publicly_accessible     = false
-  monitoring_interval     = 0
-  backup_window           = "03:00-06:00"
-  backup_retention_period = 10
-  maintenance_window      = "Mon:20:00-Mon:20:30"
+  monitoring_interval     = var.rds_monitoring_interval
+  backup_window           = var.rds_backup_window
+  backup_retention_period = var.rds_backup_retention_period
+  maintenance_window      = var.rds_maintenance_window
 
   vpc_security_group_ids              = [module.wordpress_rds_sg.security_group_id]
   subnet_ids                          = toset(data.aws_subnets.rds.ids)
   storage_encrypted                   = true
-  tags                                = var.tags
   deletion_protection                 = false
   options                             = []
   create_db_parameter_group           = false
   iam_database_authentication_enabled = true
   enabled_cloudwatch_logs_exports     = ["audit", "error", "general", "slowquery"]
-
-  depends_on = [module.wordpress_rds_sg]
+  tags                                = var.tags
 }

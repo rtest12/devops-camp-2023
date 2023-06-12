@@ -1,4 +1,4 @@
-resource "aws_route53_record" "records" {
+resource "aws_route53_record" "alb_a_record" {
   zone_id = data.aws_route53_zone.domain.zone_id
   name    = var.site_subdomain_part
   type    = "A"
@@ -12,9 +12,9 @@ resource "aws_route53_record" "records" {
 }
 
 
-resource "aws_route53_record" "tf-maxim-omelchenko" {
+resource "aws_route53_record" "validation_records" {
   for_each = {
-    for dvo in aws_acm_certificate.tf-maxim-omelchenko.domain_validation_options : dvo.domain_name => {
+    for dvo in aws_acm_certificate.certificate.domain_validation_options : dvo.domain_name => {
       name   = dvo.resource_record_name
       record = dvo.resource_record_value
       type   = dvo.resource_record_type
