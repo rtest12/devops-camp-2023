@@ -25,8 +25,8 @@ module "alb" {
         matcher             = "200-399"
       }
       targets = [for i in range(length(module.wordpress_ec2_instance)) : {
-          target_id = module.wordpress_ec2_instance[i].id
-          port      = 80
+        target_id = module.wordpress_ec2_instance[i].id
+        port      = 80
       }]
     }
   ]
