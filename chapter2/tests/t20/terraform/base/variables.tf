@@ -101,6 +101,11 @@ variable "site_subdomain_part" {
   type        = string
 }
 
+variable "root_domain" {
+  description = "root domain name"
+  type        = string
+}
+
 /* 
   ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
   │ ec2 vars                                                                                                         │

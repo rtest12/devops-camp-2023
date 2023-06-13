@@ -1,5 +1,9 @@
+data "template_file" "remote_exec" {
+  template = file("${path.cwd}/terraform/base/remote_exec.sh")
+}
+
 resource "null_resource" "execute_commands" {
-  for_each = { for idx, ec2_instance in module.wordpress_ec2_instances : idx => ec2_instance }
+  for_each = { for idx, ec2_instance in module.wordpress_ec2_instance : idx => ec2_instance }
 
   provisioner "remote-exec" {
     connection {
@@ -10,7 +14,7 @@ resource "null_resource" "execute_commands" {
     }
 
     inline = [
-      "echo 'Hello, Camp!'"
+      data.template_file.remote_exec.rendered
     ]
   }
   depends_on = [local_sensitive_file.ssh_private_key]

@@ -11,7 +11,7 @@ output "rds_mysql_endpoint" {
 
 output "ec2_instance_ids" {
   description = "list of ec2 instances"
-  value       = module.wordpress_ec2_instances[*].id
+  value       = module.wordpress_ec2_instance[*].id
 }
 
 output "alb_url" {

@@ -1,8 +1,8 @@
-module "wordpress_ec2_instances" {
+module "wordpress_ec2_instance" {
   source                 = "terraform-aws-modules/ec2-instance/aws"
   version                = "5.1.0"
   count                  = var.ec2_instances_count
-  name                   = "${local.labels.ec2_instance}-${count.index + 1}"
+  name                   = local.ec2_instances[count.index]
   ami                    = var.ec2_ami_id
   instance_type          = var.ec2_instance_type
   key_name               = aws_key_pair.wordpress_cluster.key_name
@@ -33,7 +33,7 @@ module "wordpress_ec2_instances" {
     }
   ]
   tags       = var.tags
-  depends_on = [module.wordpress_mysql_rds, aws_key_pair.wordpress_cluster]
+  depends_on = [local_sensitive_file.ssh_private_key]
 }
 
 resource "random_password" "wordpress_password" {

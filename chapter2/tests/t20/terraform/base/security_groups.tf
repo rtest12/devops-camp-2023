@@ -10,9 +10,6 @@ module "wordpress_ec2_sg" {
       rule        = "ssh-tcp"
       cidr_blocks = var.allowed_ssh_ip
       description = "ssh access from allowed vpn ip"
-      from_port   = 22
-      to_port     = 22
-      protocol    = "tcp"
     }
   ]
   ingress_with_source_security_group_id = [

@@ -17,6 +17,7 @@ tags = {
   └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
  */
 
+root_domain         = "saritasa-camps.link"
 site_url            = "tf-maxim-omelchenko.saritasa-camps.link"
 site_subdomain_part = "tf-maxim-omelchenko"
 

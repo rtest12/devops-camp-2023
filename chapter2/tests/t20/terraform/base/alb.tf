@@ -24,13 +24,10 @@ module "alb" {
         protocol            = "HTTP"
         matcher             = "200-399"
       }
-      targets = {
-        for instance in module.wordpress_ec2_instances[*].id :
-        "my_target_${instance}" => {
-          target_id = instance
+      targets = [for i in range(length(module.wordpress_ec2_instance)) : {
+          target_id = module.wordpress_ec2_instance[i].id
           port      = 80
-        }
-      }
+      }]
     }
   ]
 
@@ -45,7 +42,7 @@ module "alb" {
   ]
   tags = var.tags
   depends_on = [
-    module.wordpress_ec2_instances,
+    module.wordpress_ec2_instance,
     module.wordpress_alb_sg,
     aws_acm_certificate_validation.certificate_validation
   ]
