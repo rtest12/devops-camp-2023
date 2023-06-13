@@ -2,7 +2,7 @@ module "container" {
   source                       = "../container"
   container_image              = var.container_image
   container_image_keep_locally = var.container_image_keep_locally
-  container_name               = var.container_name != null ? var.container_name : ""
+  container_name               = var.container_name
   container_ports              = var.container_ports
   client                       = var.client
   project                      = var.project
@@ -12,10 +12,11 @@ module "container" {
 
 resource "null_resource" "index_page" {
   provisioner "local-exec" {
-    command = <<EOF
-    mkdir ${path.cwd}/${var.environment} && 
-    cat > ${path.cwd}/${var.environment}/index.html  <<EOL
-    ${local.rendered_index_html}
+    command = <<-EOF
+      mkdir ${path.cwd}/${var.environment}/ && 
+      cat > ${path.cwd}/${var.environment}/index.html <<EOF2
+      ${local.rendered_index_html}
+      EOF2
     EOF
   }
 }

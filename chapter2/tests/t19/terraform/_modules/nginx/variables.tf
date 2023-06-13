@@ -6,21 +6,20 @@ variable "container_image" {
 variable "container_image_keep_locally" {
   description = "If true, then the Docker image won't be deleted on destroy operation. If this is false, it will delete the image from the docker local storage on destroy operation."
   type        = bool
-  default     = false
 }
 
 variable "container_name" {
   description = "Value of the name for the Docker container"
   type        = string
+  validation {
+    condition     = var.container_name != null && var.container_name != ""
+    error_message = "The container_name must not be empty or null."
+  }
 }
 
 variable "container_ports" {
   description = "Value of the name for the Docker container"
   type        = map(any)
-  default = {
-    internal = 80
-    external = 8000
-  }
 }
 
 variable "client" {
@@ -45,5 +44,4 @@ variable "environment" {
 variable "container_volumes" {
   description = "A list of volumes to be mounted to the container"
   type        = list(object({ host = string, container = string }))
-  default     = []
 }

@@ -34,7 +34,6 @@ variable "container_volumes" {
     host      = string
     container = string
   }))
-  default = []
 }
 
 /* 
@@ -47,7 +46,6 @@ variable "container_volumes" {
 variable "use_redis" {
   description = "Do you need to speed up the perf using redis?"
   type        = bool
-  default     = false
 }
 
 variable "redis" {
@@ -94,4 +92,20 @@ variable "environment" {
     condition     = contains(["dev", "staging", "prod", "qa"], var.environment)
     error_message = "Environment could be one of dev | staging | prod | qa"
   }
+}
+
+/* 
+  ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ docker-related variables                                                                                         │
+  └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+ */
+
+variable "container_image_keep_locally" {
+  description = "If true, then the Docker image won't be deleted on destroy operation. If this is false, it will delete the image from the docker local storage on destroy operation."
+  type        = bool
+}
+
+variable "container_ports" {
+  description = "Value of the name for the Docker container"
+  type        = map(any)
 }

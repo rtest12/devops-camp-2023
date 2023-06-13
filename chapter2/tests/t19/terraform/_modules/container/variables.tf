@@ -1,6 +1,10 @@
 variable "container_name" {
   description = "Name of the container"
   type        = string
+  validation {
+    condition     = var.container_name != null && var.container_name != ""
+    error_message = "The container_name must not be empty or null."
+  }
 }
 
 variable "container_image" {
@@ -11,16 +15,11 @@ variable "container_image" {
 variable "container_image_keep_locally" {
   description = "If true, then the Docker image won't be deleted on destroy operation. If this is false, it will delete the image from the docker local storage on destroy operation."
   type        = bool
-  default     = false
 }
 
 variable "container_ports" {
   description = "Value of the name for the Docker container"
   type        = map(any)
-  default = {
-    internal = ""
-    external = ""
-  }
 }
 
 variable "container_volumes" {
@@ -31,7 +30,6 @@ variable "container_volumes" {
       container = string
     })
   )
-  default = []
 }
 
 variable "client" {
