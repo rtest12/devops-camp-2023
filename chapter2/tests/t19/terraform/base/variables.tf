@@ -6,34 +6,29 @@
 
 variable "nginx" {
   type = object({
-    image           = string
-    container_name  = optional(string)
-    container_ports = optional(map(string))
+    image          = string
+    container_name = optional(string)
+    container_ports = list(object({
+      internal = number
+      external = number
+    }))
     container_volumes = list(object({
-      host      = string
-      container = string
+      host_path      = string
+      container_path = string
+      read_only      = bool
     }))
     keep_locally = bool
   })
-  validation {
-    condition = (
-      can(var.nginx.container_ports) &&
-      var.nginx.container_ports["internal"] < "1000" &&
-      var.nginx.container_ports["external"] >= "8000"
-    )
-    error_message = "Container internal port should be less 1000 and external above or equal to 8000"
+  default = {
+    container_volumes = []
+    container_ports   = []
+    image             = "nginx:latest"
+    keep_locally      = false
   }
   validation {
     condition     = can(regex("^(saritasa-devops-camps-2023-).*", var.nginx.container_name))
     error_message = "Container name should be prefixed with saritasa-devops-camps-2023-"
   }
-}
-
-variable "container_volumes" {
-  type = list(object({
-    host      = string
-    container = string
-  }))
 }
 
 /* 
@@ -50,18 +45,24 @@ variable "use_redis" {
 
 variable "redis" {
   type = object({
-    image           = string
-    container_name  = optional(string)
-    container_ports = optional(map(string))
-    keep_locally    = bool
+    image          = string
+    container_name = optional(string)
+    keep_locally   = bool
+    container_ports = list(object({
+      internal = number
+      external = number
+    }))
+    container_volumes = list(object({
+      host_path      = string
+      container_path = string
+      read_only      = bool
+    }))
   })
-  validation {
-    condition = (
-      can(var.redis.container_ports) &&
-      var.redis.container_ports["internal"] == "6379" &&
-      var.redis.container_ports["external"] == "6379"
-    )
-    error_message = "Both ports should be 6379."
+  default = {
+    container_volumes = []
+    container_ports   = []
+    image             = "nginx:latest"
+    keep_locally      = false
   }
   validation {
     condition     = can(regex("^(saritasa-devops-camps-2023-).*", var.redis.container_name))
@@ -92,20 +93,4 @@ variable "environment" {
     condition     = contains(["dev", "staging", "prod", "qa"], var.environment)
     error_message = "Environment could be one of dev | staging | prod | qa"
   }
-}
-
-/* 
-  ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-  │ docker-related variables                                                                                         │
-  └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
- */
-
-variable "container_image_keep_locally" {
-  description = "If true, then the Docker image won't be deleted on destroy operation. If this is false, it will delete the image from the docker local storage on destroy operation."
-  type        = bool
-}
-
-variable "container_ports" {
-  description = "Value of the name for the Docker container"
-  type        = map(any)
 }

@@ -10,5 +10,5 @@ output "container_id_short" {
 
 output "image_id" {
   description = "ID of the Docker image"
-  value       = docker_image.container_name.id
+  value       = docker_image.image_name.id
 }

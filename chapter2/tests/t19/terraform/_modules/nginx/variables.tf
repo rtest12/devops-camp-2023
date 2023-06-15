@@ -1,5 +1,5 @@
 variable "container_image" {
-  description = "Value of the name for the Docker container"
+  description = "The docker image identifier"
   type        = string
 }
 
@@ -18,8 +18,26 @@ variable "container_name" {
 }
 
 variable "container_ports" {
-  description = "Value of the name for the Docker container"
-  type        = map(any)
+  description = "A list of internal and external ports for the container"
+  type = list(
+    object({
+      internal = number
+      external = number
+    })
+  )
+  default = []
+}
+
+variable "container_volumes" {
+  description = "A list of volumes to be mounted to the container"
+  type = list(
+    object({
+      host_path      = string
+      container_path = string
+      read_only      = bool
+    })
+  )
+  default = []
 }
 
 variable "client" {
@@ -41,7 +59,7 @@ variable "environment" {
   }
 }
 
-variable "container_volumes" {
-  description = "A list of volumes to be mounted to the container"
-  type        = list(object({ host = string, container = string }))
+variable "volume_host_path" {
+  type        = string
+  description = "Path for docker volume host"
 }

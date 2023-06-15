@@ -3,12 +3,12 @@ variable "container_name" {
   type        = string
   validation {
     condition     = var.container_name != null && var.container_name != ""
-    error_message = "The container_name must not be empty or null."
+    error_message = "The container name must not be empty or null."
   }
 }
 
 variable "container_image" {
-  description = "Value of the name for the Docker container"
+  description = "The docker image identifier"
   type        = string
 }
 
@@ -18,18 +18,26 @@ variable "container_image_keep_locally" {
 }
 
 variable "container_ports" {
-  description = "Value of the name for the Docker container"
-  type        = map(any)
+  description = "A list of internal and external ports for the container"
+  type = list(
+    object({
+      internal = number
+      external = number
+    })
+  )
 }
+
 
 variable "container_volumes" {
   description = "A list of volumes to be mounted to the container"
   type = list(
     object({
-      host      = string,
-      container = string
+      host_path      = string
+      container_path = string
+      read_only      = bool
     })
   )
+  default = []
 }
 
 variable "client" {
@@ -49,4 +57,9 @@ variable "environment" {
     condition     = contains(["dev", "staging", "prod", "qa"], var.environment)
     error_message = "Environment could be one of dev | staging | prod | qa"
   }
+}
+
+variable "volume_host_path" {
+  type        = string
+  description = "Path for docker volume host"
 }

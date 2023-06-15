@@ -15,13 +15,20 @@ use_redis = false
  */
 
 nginx = {
-  image = "nginx:latest"
-  container_ports = {
-    internal = "80"
-    external = "8000"
-  }
-  keep_locally      = false
-  container_volumes = []
+  image        = "nginx:latest"
+  keep_locally = false
+  container_ports = [
+    {
+      internal = "80"
+      external = "8000"
+    }
+  ]
+  container_volumes = [
+    {
+      container_path = "/usr/share/nginx/html"
+      read_only      = true
+    }
+  ]
 }
 
 /* 
@@ -32,22 +39,12 @@ nginx = {
 
 redis = {
   image = "redis:latest"
-  container_ports = {
-    internal = "6379"
-    external = "6379"
-  }
-  keep_locally = false
-}
-
-/* 
-  ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-  │ docker-related variables                                                                                         │
-  └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
- */
-
-container_image_keep_locally = false
-container_volumes            = []
-container_ports = {
-  internal = ""
-  external = ""
+  container_ports = [
+    {
+      internal = "6379"
+      external = "6379"
+    }
+  ]
+  container_volumes = []
+  keep_locally      = false
 }

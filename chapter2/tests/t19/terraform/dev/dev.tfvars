@@ -16,19 +16,20 @@ environment = "dev"
 nginx = {
   image          = "nginx:1.21"
   container_name = "saritasa-devops-camps-2023-workspace-nginx-dev"
-  container_ports = {
-    internal = 80,
-    external = 8080
-  }
+  container_ports = [
+    {
+      internal = "80"
+      external = "10000"
+    }
+  ]
   container_volumes = [
     {
-      host      = "dev"
-      container = "/usr/share/nginx/html"
+      container_path = "/usr/share/nginx/html"
+      read_only      = true
     }
   ]
   keep_locally = true
 }
-
 
 /* 
   ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐

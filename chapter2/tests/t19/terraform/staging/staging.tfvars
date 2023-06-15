@@ -9,26 +9,29 @@ environment = "staging"
 /* 
   ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
   │ nginx configuration variables                                                                                    |
-  | the host folder in the root directory of the project, the full path is constructed in _modules/container/main.tf │
+  | the path of the host volume is located at base/main.tf                                                           |
+  | and by default it uses a folder with the name of the environment at the root of the project.                     │
   └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
  */
 
 nginx = {
   image          = "nginx:1.21"
   container_name = "saritasa-devops-camps-2023-workspace-nginx-staging"
-  container_ports = {
-    internal = 80,
-    external = 9090
-  }
+  container_ports = [
+    {
+      internal = "80"
+      external = "9090"
+    }
+  ]
   container_volumes = [
     {
-      host      = "staging"
+      host_path = ""
       container = "/usr/share/nginx/html"
+      read_only = true
     }
   ]
   keep_locally = true
 }
-
 
 /* 
   ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐

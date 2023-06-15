@@ -13,6 +13,7 @@ __pycache__
 *.pem
 *.pub
 *.log
+*.terraform.lock.hcl
 assets/ssl
 builds/
 packer_cache
