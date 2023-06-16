@@ -8,7 +8,7 @@ module "wordpress_ec2_sg" {
   ingress_with_cidr_blocks = [
     {
       rule        = "ssh-tcp"
-      cidr_blocks = var.allowed_ssh_ip
+      cidr_blocks = local.ssh_allow_list
       description = "ssh access from allowed vpn ip"
     }
   ]
@@ -20,7 +20,6 @@ module "wordpress_ec2_sg" {
     }
   ]
   egress_rules = ["all-all"]
-  tags         = var.tags
 }
 
 module "wordpress_rds_sg" {
@@ -37,7 +36,6 @@ module "wordpress_rds_sg" {
     }
   ]
   egress_rules = ["all-all"]
-  tags         = var.tags
 }
 
 module "wordpress_alb_sg" {
@@ -49,5 +47,4 @@ module "wordpress_alb_sg" {
   ingress_cidr_blocks = ["0.0.0.0/0"]
   ingress_rules       = ["https-443-tcp"]
   egress_rules        = ["all-all"]
-  tags                = var.tags
 }

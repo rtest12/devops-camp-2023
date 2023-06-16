@@ -1,5 +1,9 @@
 data "template_file" "remote_exec" {
-  template = file("${path.cwd}/terraform/base/remote_exec.sh")
+  template = file("${path.cwd}/terraform/base/scripts/remote_exec.sh")
+  vars = {
+    name      = "Camp"
+    checkfile = "/tmp/checkfile"
+  }
 }
 
 resource "null_resource" "execute_commands" {
@@ -9,7 +13,7 @@ resource "null_resource" "execute_commands" {
     connection {
       type        = "ssh"
       user        = var.ec2_user
-      private_key = file(local_sensitive_file.ssh_private_key.filename)
+      private_key = file(local_sensitive_file.private_key_file.filename)
       host        = each.value.public_ip
     }
 
@@ -17,5 +21,5 @@ resource "null_resource" "execute_commands" {
       data.template_file.remote_exec.rendered
     ]
   }
-  depends_on = [local_sensitive_file.ssh_private_key]
+  depends_on = [local_sensitive_file.private_key_file]
 }

@@ -1,7 +1,6 @@
 terraform {
   cloud {
     organization = "saritasa-devops-camps"
-
     workspaces {
       tags = [
         "owner:maxim-omelchenko",

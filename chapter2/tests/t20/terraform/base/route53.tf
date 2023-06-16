@@ -1,8 +1,7 @@
-resource "aws_route53_record" "alb_a_record" {
+resource "aws_route53_record" "wordpress_alb_a_record" {
   zone_id = data.aws_route53_zone.domain.zone_id
-  name    = var.site_subdomain_part
+  name    = var.client
   type    = "A"
-
   alias {
     name                   = module.alb.lb_dns_name
     zone_id                = module.alb.lb_zone_id
@@ -12,7 +11,7 @@ resource "aws_route53_record" "alb_a_record" {
 }
 
 
-resource "aws_route53_record" "validation_records" {
+resource "aws_route53_record" "acm_validation_records" {
   for_each = {
     for dvo in aws_acm_certificate.certificate.domain_validation_options : dvo.domain_name => {
       name   = dvo.resource_record_name
@@ -20,7 +19,6 @@ resource "aws_route53_record" "validation_records" {
       type   = dvo.resource_record_type
     }
   }
-
   allow_overwrite = true
   name            = each.value.name
   records         = [each.value.record]

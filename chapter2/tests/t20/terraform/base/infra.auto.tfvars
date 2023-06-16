@@ -1,25 +1,14 @@
 client  = "maxim-omelchenko"
 project = "wp"
 
-tags = {
-  project    = "wp"
-  terraform  = true
-  git        = "https://github.com/rtest12/devops-camp-2023.git"
-  branch     = "Task_20"
-  created_by = "maxim-omelchenko"
-  created_at = "06/12/2023"
-  updated_at = "06/12/2023"
-}
-
 /* 
   ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
   │ fqdn vars                                                                                                        │
   └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
  */
 
-root_domain         = "saritasa-camps.link"
-site_url            = "tf-maxim-omelchenko.saritasa-camps.link"
-site_subdomain_part = "tf-maxim-omelchenko"
+root_domain           = "saritasa-camps.link"
+acm_validation_method = "DNS"
 
 /* 
   ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
@@ -62,13 +51,24 @@ ec2_user            = "ec2-user"
   └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
  */
 
-ssh_cluster_name = "wordpress_cluster"
-allowed_ssh_ip   = "195.201.120.196/32"
+# list of saritasa vpn ip addresses
+allowed_ssh_ip = ["195.201.120.196/32"]
 
 /* 
   ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-  │ efs variables                                                                                                    │
+  │ list of keys for which to generate random passwords                                                              │
   └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
  */
 
-efs_name = "wordpress-efs"
+password_keys = [
+  "wordpress_password",
+  "auth_key",
+  "secure_auth_key",
+  "logged_in_key",
+  "nonce_key",
+  "auth_salt",
+  "secure_auth_salt",
+  "logged_in_salt",
+  "nonce_salt",
+  "db_password"
+]

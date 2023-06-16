@@ -1,17 +1,15 @@
 resource "aws_acm_certificate" "certificate" {
-  domain_name       = var.site_url
-  validation_method = "DNS"
+  domain_name       = local.domain_name
+  validation_method = var.acm_validation_method
   subject_alternative_names = [
-    "www.${var.site_url}"
+    "www.${local.domain_name}"
   ]
-
   lifecycle {
     create_before_destroy = true
   }
-  tags = var.tags
 }
 
 resource "aws_acm_certificate_validation" "certificate_validation" {
   certificate_arn         = aws_acm_certificate.certificate.arn
-  validation_record_fqdns = values(aws_route53_record.validation_records)[*].fqdn
+  validation_record_fqdns = values(aws_route53_record.acm_validation_records)[*].fqdn
 }

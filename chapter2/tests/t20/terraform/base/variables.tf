@@ -76,33 +76,17 @@ variable "rds_maintenance_window" {
 
 /* 
   ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-  │ efs vars                                                                                                         │
-  └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
- */
-
-variable "efs_name" {
-  description = "name of the efs file system"
-  type        = string
-}
-
-/* 
-  ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
   │ fqdn vars                                                                                                        │
   └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
  */
 
-variable "site_url" {
-  description = "site url"
-  type        = string
-}
-
-variable "site_subdomain_part" {
-  description = "subdomain part name"
-  type        = string
-}
-
 variable "root_domain" {
   description = "root domain name"
+  type        = string
+}
+
+variable "acm_validation_method" {
+  description = "acm certificate validation method"
   type        = string
 }
 
@@ -113,7 +97,7 @@ variable "root_domain" {
  */
 
 variable "ec2_instances_count" {
-  description = "number of wordPress ec2 instances"
+  description = "number of wordpress ec2 instances"
   type        = number
 }
 
@@ -172,11 +156,6 @@ variable "environment" {
   }
 }
 
-variable "tags" {
-  description = "tags for the resource"
-  type        = map(any)
-}
-
 variable "availability_zones" {
   description = "Availability Zones"
   type        = list(string)
@@ -190,18 +169,18 @@ variable "vpc_tags" {
   }
 }
 
+variable "password_keys" {
+  type        = list(string)
+  description = "List of keys for which to generate random passwords"
+}
+
 /* 
   ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
   │ ssh                                                                                                              │
   └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
  */
 
-variable "ssh_cluster_name" {
-  description = "ssh cluster name"
-  type        = string
-}
-
 variable "allowed_ssh_ip" {
-  description = "allowed ip address for ec2 ssh access"
-  type        = string
+  description = "allowed IP addresses for EC2 SSH access"
+  type        = list(string)
 }

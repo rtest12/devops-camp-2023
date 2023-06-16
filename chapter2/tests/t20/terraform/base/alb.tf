@@ -6,7 +6,6 @@ module "alb" {
   vpc_id             = data.aws_vpc.target.id
   subnets            = data.aws_subnets.wordpress.ids
   security_groups    = [module.wordpress_alb_sg.security_group_id]
-
   target_groups = [
     {
       backend_port     = 80
@@ -30,7 +29,6 @@ module "alb" {
       }]
     }
   ]
-
   https_listeners = [
     {
       port               = 443
@@ -40,7 +38,6 @@ module "alb" {
       certificate_arn    = aws_acm_certificate.certificate.arn
     }
   ]
-  tags = var.tags
   depends_on = [
     module.wordpress_ec2_instance,
     module.wordpress_alb_sg,

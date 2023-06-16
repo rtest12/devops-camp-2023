@@ -59,5 +59,5 @@ ec2_ssm_role        = "ssm-role"
   └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
  */
 
-ssh_cluster_name = "wordpress_cluster"
-allowed_ssh_ip   = "195.201.120.196/32"
+# list of saritasa vpn ip addresses
+allowed_ssh_ip = ["195.201.120.196/32", "99.128.21.249/32"]
