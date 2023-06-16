@@ -40,7 +40,6 @@ rds_port                  = "3306"
 ec2_volume_size     = 20
 ec2_volume_type     = "gp3"
 ec2_instances_count = 2
-ec2_ami_id          = "ami-01107263728f3bef4"
 ec2_instance_type   = "t3.micro"
 ec2_ssm_role        = "ssm-role"
 

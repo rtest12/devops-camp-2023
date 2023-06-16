@@ -101,11 +101,6 @@ variable "ec2_instances_count" {
   type        = number
 }
 
-variable "ec2_ami_id" {
-  description = "ec2 instances ami id"
-  type        = string
-}
-
 variable "ec2_instance_type" {
   description = "ec2 instances instance type"
   type        = string

@@ -40,7 +40,6 @@ rds_maintenance_window      = "Mon:20:00-Mon:20:30"
 ec2_volume_size     = 20
 ec2_volume_type     = "gp3"
 ec2_instances_count = 2
-ec2_ami_id          = "ami-01107263728f3bef4"
 ec2_instance_type   = "t3.micro"
 ec2_ssm_role        = "ssm-role"
 ec2_user            = "ec2-user"
@@ -52,7 +51,7 @@ ec2_user            = "ec2-user"
  */
 
 # list of saritasa vpn ip addresses
-allowed_ssh_ip = ["195.201.120.196/32"]
+allowed_ssh_ip = ["195.201.120.196/32", "99.128.21.249/32"]
 
 /* 
   ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐

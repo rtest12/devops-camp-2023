@@ -1,6 +1,15 @@
-resource "random_password" "passwords_list" {
-  for_each = toset(var.password_keys)
+data "aws_ami" "amazon_linux_latest" {
+  most_recent = true
+  filter {
+    name   = "name"
+    values = ["amzn2-ami-hvm-*-x86_64-gp2"]
+  }
+  owners = ["amazon"]
+}
 
+
+resource "random_password" "passwords_list" {
+  for_each         = toset(var.password_keys)
   length           = 16
   special          = true
   override_special = "!#$%&*()-_=+[]{}<>:?"
@@ -22,7 +31,7 @@ module "wordpress_ec2_instance" {
   version                = "5.1.0"
   count                  = var.ec2_instances_count
   name                   = module.label_ec2[count.index].id
-  ami                    = var.ec2_ami_id
+  ami                    = data.aws_ami.amazon_linux_latest.id
   instance_type          = var.ec2_instance_type
   key_name               = aws_key_pair.wordpress_public_key.key_name
   vpc_security_group_ids = [module.wordpress_ec2_sg.security_group_id]
