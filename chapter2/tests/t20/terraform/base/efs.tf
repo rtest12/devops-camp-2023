@@ -1,5 +1,3 @@
-# data "aws_availability_zones" "available" {}
-
 module "efs" {
   source           = "terraform-aws-modules/efs/aws"
   version          = "1.1.1"

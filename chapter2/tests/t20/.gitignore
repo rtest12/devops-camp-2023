@@ -13,7 +13,7 @@ __pycache__
 *.pem
 *.pub
 *.log
-assets/ssl
+assets/
 builds/
 packer_cache
 git-crypt-key
