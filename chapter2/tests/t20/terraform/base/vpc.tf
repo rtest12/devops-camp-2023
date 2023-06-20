@@ -16,8 +16,6 @@ data "aws_subnets" "rds" {
   }
 }
 
-data "aws_caller_identity" "current" {}
-
 data "aws_availability_zones" "all" {}
 
 data "aws_route53_zone" "domain" {

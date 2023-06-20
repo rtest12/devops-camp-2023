@@ -2,11 +2,10 @@ data "aws_ami" "amazon_linux_latest" {
   most_recent = true
   filter {
     name   = "name"
-    values = ["amzn2-ami-hvm-*-x86_64-gp2"]
+    values = ["al2023-ami-*-kernel-*-x86_64"]
   }
   owners = ["amazon"]
 }
-
 
 resource "random_password" "passwords_list" {
   for_each         = toset(var.password_keys)

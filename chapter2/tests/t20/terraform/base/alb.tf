@@ -23,8 +23,8 @@ module "alb" {
         protocol            = "HTTP"
         matcher             = "200-399"
       }
-      targets = [for i in range(length(module.wordpress_ec2_instance)) : {
-        target_id = module.wordpress_ec2_instance[i].id
+      targets = [for instance in module.wordpress_ec2_instance : {
+        target_id = instance.id
         port      = 80
       }]
     }
