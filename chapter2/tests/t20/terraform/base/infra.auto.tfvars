@@ -30,6 +30,11 @@ rds_monitoring_interval     = 0
 rds_backup_retention_period = 10
 rds_backup_window           = "03:00-06:00"
 rds_maintenance_window      = "Mon:20:00-Mon:20:30"
+rds_skip_final_snapshot     = false
+rds_publicly_accessible     = false
+rds_deletion_protection     = false
+rds_options_list            = []
+rds_cloudwatch_logs_list    = []
 
 /* 
   ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
@@ -71,3 +76,11 @@ password_keys = [
   "nonce_salt",
   "db_password"
 ]
+
+/* 
+  ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ efs vars                                                                                                         │
+  └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+ */
+
+efs_performance_mode = "generalPurpose"

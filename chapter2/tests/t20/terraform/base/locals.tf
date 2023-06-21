@@ -18,5 +18,4 @@ locals {
   }
   availability_zone_subnets = data.aws_subnets.wordpress.ids
   domain_name               = "${var.client}.${var.root_domain}"
-  ssh_allow_list            = join(",", var.allowed_ssh_ip)
 }

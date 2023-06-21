@@ -1,8 +1,8 @@
 data "template_file" "remote_exec" {
   template = file("${path.cwd}/terraform/base/scripts/remote_exec.sh")
   vars = {
-    name      = "Camp"
-    checkfile = "/tmp/checkfile"
+    name      = var.remote_exec_template_name
+    checkfile = var.remote_exec_template_checkfile
   }
 }
 

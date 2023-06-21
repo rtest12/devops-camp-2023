@@ -9,13 +9,13 @@ module "wordpress_mysql_rds" {
   instance_class                      = var.rds_instance_class
   allocated_storage                   = var.rds_allocated_storage
   max_allocated_storage               = var.rds_max_allocated_storage
-  skip_final_snapshot                 = true
+  skip_final_snapshot                 = var.rds_skip_final_snapshot
   db_name                             = var.rds_db_name
   username                            = var.rds_db_user
   create_random_password              = false
   password                            = random_password.passwords_list["db_password"].result
   port                                = var.rds_port
-  publicly_accessible                 = false
+  publicly_accessible                 = var.rds_publicly_accessible
   monitoring_interval                 = var.rds_monitoring_interval
   backup_window                       = var.rds_backup_window
   backup_retention_period             = var.rds_backup_retention_period
@@ -23,9 +23,9 @@ module "wordpress_mysql_rds" {
   vpc_security_group_ids              = [module.wordpress_rds_sg.security_group_id]
   subnet_ids                          = toset(data.aws_subnets.rds.ids)
   storage_encrypted                   = true
-  deletion_protection                 = false
-  options                             = []
+  deletion_protection                 = var.rds_deletion_protection
+  options                             = var.rds_options_list
   create_db_parameter_group           = false
   iam_database_authentication_enabled = true
-  enabled_cloudwatch_logs_exports     = ["audit", "error", "general", "slowquery"]
+  enabled_cloudwatch_logs_exports     = var.rds_cloudwatch_logs_list
 }

@@ -30,6 +30,8 @@ rds_max_allocated_storage = 1000
 rds_db_name               = "wordpress_db"
 rds_db_user               = "user_db"
 rds_port                  = "3306"
+rds_skip_final_snapshot   = false
+rds_deletion_protection   = true
 
 /* 
   ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐

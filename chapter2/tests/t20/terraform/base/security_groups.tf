@@ -8,7 +8,7 @@ module "wordpress_ec2_sg" {
   ingress_with_cidr_blocks = [
     {
       rule        = "ssh-tcp"
-      cidr_blocks = local.ssh_allow_list
+      cidr_blocks = join(",", var.allowed_ssh_ip)
       description = "ssh access from allowed vpn ip"
     }
   ]

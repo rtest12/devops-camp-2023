@@ -30,6 +30,8 @@ rds_max_allocated_storage = 1000
 rds_db_name               = "wordpress_db"
 rds_db_user               = "user_db"
 rds_port                  = "3306"
+rds_skip_final_snapshot   = true
+rds_cloudwatch_logs_list  = ["audit", "error", "general", "slowquery"]
 
 /* 
   ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
@@ -45,9 +47,9 @@ ec2_ssm_role        = "ssm-role"
 
 /* 
   ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-  │ ssh variables                                                                                                    │
+  │ ssh variables                                                                                                    |
+  | list of saritasa vpn ip addresses                                                                                │
   └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
  */
 
-# list of saritasa vpn ip addresses
 allowed_ssh_ip = ["195.201.120.196/32", "99.128.21.249/32"]

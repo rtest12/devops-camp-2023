@@ -2,7 +2,7 @@ module "efs" {
   source           = "terraform-aws-modules/efs/aws"
   version          = "1.1.1"
   name             = local.labels.efs
-  performance_mode = "generalPurpose"
+  performance_mode = var.efs_performance_mode
   throughput_mode  = "elastic"
   mount_targets = [
     for az_index, az_name in data.aws_availability_zones.all.names : {

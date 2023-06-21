@@ -74,6 +74,31 @@ variable "rds_maintenance_window" {
   type        = string
 }
 
+variable "rds_skip_final_snapshot" {
+  description = "rds skip final snapshot or not"
+  type        = bool
+}
+
+variable "rds_publicly_accessible" {
+  description = "rds publicly accessible"
+  type        = bool
+}
+
+variable "rds_deletion_protection" {
+  description = "rds deletion protection"
+  type        = bool
+}
+
+variable "rds_options_list" {
+  description = "a list of options to apply"
+  type        = list(string)
+}
+
+variable "rds_cloudwatch_logs_list" {
+  description = "list of log types to enable for exporting to cloudwatch"
+  type        = list(string)
+}
+
 /* 
   ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
   │ fqdn vars                                                                                                        │
@@ -178,4 +203,33 @@ variable "password_keys" {
 variable "allowed_ssh_ip" {
   description = "allowed IP addresses for EC2 SSH access"
   type        = list(string)
+}
+
+/* 
+  ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ efs                                                                                                              │
+  └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+ */
+
+variable "efs_performance_mode" {
+  description = "efs performance mode"
+  type        = string
+}
+
+/* 
+  ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ remote_exec vars for template                                                                                    │
+  └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+ */
+
+variable "remote_exec_template_name" {
+  description = "name just for checking script operation"
+  type        = string
+  default     = "Camp"
+}
+
+variable "remote_exec_template_checkfile" {
+  description = "remote_exec checkfile with full path, just for checking script operation"
+  type        = string
+  default     = "/tmp/checkfile"
 }
