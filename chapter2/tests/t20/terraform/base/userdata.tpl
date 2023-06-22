@@ -4,7 +4,7 @@
 # install
 sudo yum install -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm
 sudo yum install -y https://dev.mysql.com/get/mysql80-community-release-el8-5.noarch.rpm
-sudo yum install nginx php php-fpm amazon-ssm-agent amazon-efs-utils nfs-utils gcc openssl-devel php-mysqli -y
+sudo yum install nginx php php-fpm amazon-ssm-agent amazon-efs-utils nfs-utils gcc openssl-devel php-mysqli wget -y
 
 # start all
 sudo systemctl start nginx
@@ -95,9 +95,9 @@ fi
 
 sudo chown ssm-user:ssm-user wordpress/
 sudo chmod go+rw wordpress
-wget https://wordpress.org/latest.zip
-unzip latest.zip
-rm -rf latest.zip
+sudo wget https://wordpress.org/latest.zip
+sudo unzip latest.zip
+sudo rm -rf latest.zip
 
 # create wordpress config
 cat > /efs/wordpress/wp-config.php <<EOF
